@@ -1,2 +1,2 @@
 # R
-menu for altomatization of simualtion scrips 
+my R scripts repository
