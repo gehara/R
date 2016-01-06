@@ -3,16 +3,16 @@ anc.Ne.par<-function(){
   
   if(hist.demog=="NO"){
     
-      if(exists("enNe", envir=.GlobalEnv)){
-        rm(enNe, envir=.GlobalEnv)
-        rm(ent, envir=.GlobalEnv)
+      if(exists("enNe", envir=.e)){
+        rm(enNe, envir=.e)
+        rm(ent, envir=.e)
         
       } else {} 
   }
     
   if (hist.demog=="YES"){
     
-    if(exists("enNe", envir=.GlobalEnv)){
+    if(exists("enNe", envir=.e)){
     } else {
       time.anc.Ne.par<-NULL 
       anc.Ne.par<-NULL
@@ -48,8 +48,8 @@ anc.Ne.par<-function(){
     }
   } else {
     hist.demog<<-"NO"
-    if(exists("en", envir=.GlobalEnv)){
-      rm(en, envir=.GlobalEnv)}
+    if(exists("en", envir=.e)){
+      rm(en, envir=.e)}
     main.menu()
   }
 }

@@ -2,58 +2,48 @@
 switch.main.menu<-function(){
   switch(letter,
          
-         A = {.GlobalEnv$npops<-as.numeric(readline("Number of populations to simulate: "))
-              if(exists("ma", envir=.GlobalEnv))
-                rm(ma, envir=.GlobalEnv)
-              if(exists("emat",envir=.GlobalEnv))
-                rm(emat, envir=.GlobalEnv)
-              if(exists("enNe",envir=.GlobalEnv))
-                rm(enNe,envir=.GlobalEnv)
-              if(exists("ent",envir=.GlobalEnv))
-                rm(ent,envir=.GlobalEnv)
-              if(exists("ejNe",envir=.GlobalEnv))
-                rm(ejNe,envir=.GlobalEnv)
-              mig.presence<<-"NO"
-              hist.demog<<-"NO"
-              list.of.par()
+         A = {remove.all.par()
               join.par()
+              cur.Ne.par()
               main.menu()},
          
          B = {join.par()
-              #junctions.menu()
+              cur.Ne.par()
               main.menu()},
          
-         C = {.GlobalEnv$mig.presence<-readline("Migration among populations (YES or NO)?: ")
-              if(.GlobalEnv$mig.presence=="YES"){
+         C = {.e$mig.presence<-readline("Migration among populations (YES or NO)?: ")
+              if(.e$mig.presence=="YES"){
                 mig.par()
-                mig.menu()} else if (.GlobalEnv$mig.presence=="NO"){
-                  if (exists("ema",envir=.GlobalEnv))
-                    rm(ema,envir=.GlobalEnv)
-                  if (exists("emat",envir=.GlobalEnv))
-                    rm(emat, envir=.GlobalEnv)
-                  if (exists("ma",envir=.GlobalEnv))
-                    rm(ma, envir=.GlobalEnv)
-                } 
+                mig.menu()} else if (.e$mig.presence=="NO"){
+                  options(warn=-1)
+                  rm(m,em,envir=.e)
+                  options(warn=0)
+                  } 
                 main.menu()},
          
          D = {hist.demog<-readline("Ne change throgh time (YES or NO?):")
-              hist.demog<<-hist.demog
+              if(hist.demog=="YES"){
               anc.Ne.par()
-              demog.menu()},
+              demog.menu()} else if (hist.demog=="NO"){
+                options(warn=-1)
+                rm(en,envir=.e)
+                options(warn=0)
+              }
+              main.menu(),
          
-         m = {if(exists("ma",envir=.GlobalEnv)){
+         E = {if(exists("ma",envir=.e)){
               }else{
-              .GlobalEnv$mig.presence<-readline("Migration among populations (YES or NO)?: " )
-              if(.GlobalEnv$mig.presence=="NO"){ main.menu()
+              .e$mig.presence<-readline("Migration among populations (YES or NO)?: " )
+              if(.e$mig.presence=="NO"){ main.menu()
                 } else {mig.par()}
               }
               mig.menu()},
          
-         n = {demog.menu()},
+         "F" = {demog.menu()},
          
-         t= {time.menu()},
+         G= {time.menu()},
          
-         X= {condition.matrix()
+         H= {condition.matrix()
              condition.menu()},
                 
          Q={get.model()}

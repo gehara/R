@@ -1,8 +1,8 @@
 
 switch.demog.menu<-function(){
-  n<-.GlobalEnv$n
-  ejNe<-.GlobalEnv$ejNe
-  enNe<-.GlobalEnv$enNe
+  n<-.e$n
+  ejNe<-.e$ejNe
+  enNe<-.e$enNe
   switch(letter,
          A = {prior.dist.Ne<-readline("Ne prior distribution (normal or uniform): ")
               
@@ -12,14 +12,14 @@ switch.demog.menu<-function(){
               for(i in 1:length(ejNe)){
                 ejNe[[i]][3]<-prior.dist.Ne
               }
-              if(exists("enNe", envir=.GlobalEnv)){
+              if(exists("enNe", envir=.e)){
               for(i in 1:length(enNe)){
                 enNe[[i]][3]<-prior.dist.Ne
               }
-              .GlobalEnv$enNe<-enNe
+              .e$enNe<-enNe
               } else {}
-              .GlobalEnv$n<-n
-              .GlobalEnv$ejNe<-ejNe
+              .e$n<-n
+              .e$ejNe<-ejNe
                           
               demog.menu()},
          
@@ -44,8 +44,8 @@ switch.demog.menu<-function(){
              ejNe[[i]][2]<-readline(paste("Historical Ne prior (2N)",names(ejNe[i]),"max: "))
               }
             }
-           .GlobalEnv$ejNe<-ejNe
-           .GlobalEnv$n<-n
+           .e$ejNe<-ejNe
+           .e$n<-n
            demog.menu()
            },
            
@@ -61,7 +61,7 @@ switch.demog.menu<-function(){
                 enNe[[i]][2]<-readline(paste("Historical Ne prior (2N)",names(enNe[i]),"max: "))
                 }
               }
-              .GlobalEnv$enNe<-enNe
+              .e$enNe<-enNe
               demog.menu()},
          
          B = {main.menu()}

@@ -1,25 +1,23 @@
-setwd("/media/marcelo/HD2/Dropbox/Programacao/Rcodes/ABC.package/menu")
+#setwd("/media/marcelo/HD2/Dropbox/Programacao/Rcodes/ABC.package/menu")
 #setwd("C:/Users/Guilherme/Dropbox/ABC.package/menu")
 library(ape)
+.e<-new.env()
 
 main.menu<-function()
   {
-  if(exists("mig.presence")){
-  } else { mig.presence<<-"NO"}
-  if(exists("hist.demog")){
-  } else {hist.demog<<-"NO"}
-  if (exists("npops")){
-  } else {
-    npops<<-2
-    list.of.par()
-    join.par()
-  }
+  
+  if(exists("tree", envir=.e)){
+  
+    }else{join.par()
+      cur.Ne.par()}
   
   print.main.menu()  
-  letter<<-readline(">>>>")
+
+    letter<<-readline(">>>>")
   
   switch.main.menu()
-}
+
+  }
 
 
 

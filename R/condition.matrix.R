@@ -1,14 +1,14 @@
 
 
 condition.matrix<-function(){
-size<-.GlobalEnv$n
-if(exists("enNe", envir=.GlobalEnv)){
-size<-c(size,.GlobalEnv$enNe)
+size<-.e$n
+if(exists("enNe", envir=.e)){
+size<-c(size,.e$enNe)
 }
-size<-c(size,.GlobalEnv$ejNe)
-size<-c(size,.GlobalEnv$ma)
-if(exists("ema", envir=.GlobalEnv)){
-size<-c(size,.GlobalEnv$ema)
+size<-c(size,.e$ejNe)
+size<-c(size,.e$ma)
+if(exists("ema", envir=.e)){
+size<-c(size,.e$ema)
 }
 size.matrix<-matrix(nrow=length(size),ncol=length(size))
 colnames(size.matrix)<-names(size)
@@ -16,19 +16,19 @@ rownames(size.matrix)<-names(size)
 diag(size.matrix)<-0
 
 
-time<-.GlobalEnv$ejt
-if(exists("ejt", envir=.GlobalEnv)){
-time<-c(time,.GlobalEnv$ent)
+time<-.e$ejt
+if(exists("ejt", envir=.e)){
+time<-c(time,.e$ent)
 }
-if(exists("emat",envir=.GlobalEnv)){
-time<-c(time,.GlobalEnv$emat)
+if(exists("emat",envir=.e)){
+time<-c(time,.e$emat)
 }
 time.matrix<-matrix(nrow=length(time),ncol=length(time))
 colnames(time.matrix)<-names(time)
 rownames(time.matrix)<-names(time)
 diag(time.matrix)<-0
 
-.GlobalEnv$time.matrix<-time.matrix
-.GlobalEnv$size.matrix<-size.matrix
+.e$time.matrix<-time.matrix
+.e$size.matrix<-size.matrix
 }
 

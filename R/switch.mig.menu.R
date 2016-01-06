@@ -1,20 +1,20 @@
 
 switch.mig.menu<-function(){
-  ma<-.GlobalEnv$ma
-  if(exists(".GlobalEnv$ema"))
-    ema<-.GlobalEnv$ema
+  ma<-.e$ma
+  if(exists(".e$ema"))
+    ema<-.e$ema
   switch(letter,
          A = {prior.dist.mig<-readline("Migration prior distribution (normal or uniform?): ")
               for(i in 1:length(ma)){
                 ma[[i]][3]<-prior.dist.mig
               }
-              .GlobalEnv$ma<-ma
-              if(exists("ema",envir=.GlobalEnv)){
+              .e$ma<-ma
+              if(exists("ema",envir=.e)){
                 prior.dist.mig<-prior.dist.mig
                 for(i in 1:length(ema)){
                   ema[[i]][3]<-prior.dist.mig
                 }
-              .GlobalEnv$ema<-ema
+              .e$ema<-ema
               }  
               mig.menu()},
          P = {for(i in 1:length(ma)){
@@ -26,9 +26,9 @@ switch.mig.menu<-function(){
               ma[[i]][1]<-readline(paste("migration prior (4Nm)",names(ma[i]),"min: "))
               ma[[i]][2]<-readline(paste("migration prior (4Nm)",names(ma[i]),"max: "))
               }
-              .GlobalEnv$ma<-ma}
+              .e$ma<-ma}
               
-              if(exists("ema",envir=.GlobalEnv)){
+              if(exists("ema",envir=.e)){
               for(i in 1:length(ema)){
                 if(ema[[i]][3]=="normal"){
                   ema[[i]][1]<-readline(paste("migration prior (4Nm)",names(ema[i]),"mean: "))
@@ -38,7 +38,7 @@ switch.mig.menu<-function(){
                   ema[[i]][1]<-readline(paste("migration prior (4Nm)",names(ema[i]),"min: "))
                   ema[[i]][2]<-readline(paste("migration prior (4Nm)",names(ema[i]),"max: "))
                 }
-              .GlobalEnv$ema<-ema}
+              .e$ema<-ema}
               }
               mig.menu()},
          M = {anc.mig<-readline("Different ancestral migration (YES or NO?): ")
@@ -46,7 +46,7 @@ switch.mig.menu<-function(){
                 anc.mig.par()
                 mig.menu()
                 } else if (exists("ema")){
-                rm(ema, envir=.GlobalEnv)
+                rm(ema, envir=.e)
                 mig.menu()
               } else {
                 mig.menu()

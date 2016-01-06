@@ -40,7 +40,7 @@ anc.mig.par<-function(){
     migration[[i]][3]<-"uniform"
   }
   
-  .GlobalEnv$ema<-migration
-  .GlobalEnv$emat<-t.migration
+  .e$ema<-migration
+  .e$emat<-t.migration
 }
   

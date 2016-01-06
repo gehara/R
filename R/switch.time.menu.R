@@ -1,8 +1,8 @@
 
 switch.time.menu<-function(){
-  emat<-.GlobalEnv$emat
-  ejt<-.GlobalEnv$ejt
-  ent<-.GlobalEnv$ent
+  emat<-.e$emat
+  ejt<-.e$ejt
+  ent<-.e$ent
   switch(letter,
          A = {prior.dist.Ne<-readline("time prior distribution (normal or uniform): ")
               
@@ -10,20 +10,20 @@ switch.time.menu<-function(){
                 ejt[[i]][3]<-prior.dist.Ne
               }
               
-              if(exists("emat",envir=.GlobalEnv)){
+              if(exists("emat",envir=.e)){
               for(i in 1:length(emat)){
                 emat[[i]][3]<-prior.dist.Ne
               }
-              .GlobalEnv$emat<-emat
+              .e$emat<-emat
               }
               
-              if(exists("ent", envir=.GlobalEnv)){
+              if(exists("ent", envir=.e)){
               for(i in 1:length(ent)){
                 ent[[i]][3]<-prior.dist.Ne
               }
-              .GlobalEnv$ent<-ent
+              .e$ent<-ent
               }
-              .GlobalEnv$ejt<-ejt
+              .e$ejt<-ejt
                           
               time.menu()},
          
@@ -36,7 +36,7 @@ switch.time.menu<-function(){
              ejt[[i]][1]<-readline(paste("Time of junction in generations",names(ejt[i]),"min: "))
              ejt[[i]][2]<-readline(paste("Time of junction in generations",names(ejt[i]),"max: "))
            }
-           .GlobalEnv$ejt<-ejt
+           .e$ejt<-ejt
            }
            time.menu()},
            
@@ -49,7 +49,7 @@ switch.time.menu<-function(){
              ent[[i]][1]<-readline(paste("Time of Ne change in generations",names(ent[i]),"min: "))
              ent[[i]][2]<-readline(paste("Time of Ne change in generations",names(ent[i]),"max: "))
               }
-            .GlobalEnv$ent<-ent
+            .e$ent<-ent
             }
            time.menu()
            },
@@ -65,7 +65,7 @@ switch.time.menu<-function(){
                 emat[[i]][2]<-readline(paste("Time of migration change in generations",names(emat[i]),"max: "))
                 }
               }
-              .GlobalEnv$emat<-emat
+              .e$emat<-emat
               time.menu()},
          
          B = {main.menu()},

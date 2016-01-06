@@ -20,7 +20,7 @@ mig.par<-function(){
     migration[[i]][2]<-10
     migration[[i]][3]<-"uniform"
   }
-  .GlobalEnv$ma<-migration
+  .e$ma<-migration
   
   "if(anc.mig==YES){
     anc.mig.par()
