@@ -1,28 +1,46 @@
 
 
 get.model<-function(){
-join.matrix<-.e$join.matrix
-size<-list(NULL,NULL,NULL,NULL,NULL)
-names(size)<-c("n","enNe","ejNe","ma","ema")
-size$n<-.e$n
-size$enNe <- .e$enNe
-size$ejNe <- .e$ejNe
-size$ma <- .e$ma
-size$ema <- .e$ema
 
-time<-list(NULL,NULL,NULL)
-names(time)<-c("ent","emat","ejt")
-time$ent<-.e$ent
-time$emat<-.e$emat
-time$ejt<-.e$ejt
+model<-list(NULL,NULL,NULL,NULL)
+names(model)<-c("loci","I","flags","conds")
+model$loci<-.e$loci
+model$I<-.e$I
 
-conditions<-list(NULL,NULL)
-names(conditions)<-c("size.matrix","time.matrix")
-conditions$size.matrix<-.e$size.matrix
-conditions$time.matrix<-.e$time.matrix
+flags<-list(NULL,NULL,NULL,NULL,NULL)
+names(flags)<-c("n","m","en","em","ej")
+flags$n <- .e$n
+flags$m <- .e$m
+flags$en <- .e$en
+flags$em <- .e$em
+flags$ej <- .e$ej
 
-model<-list(size,time,join.matrix,conditions)
-#rm(list=ls(envir=.e),envir=.e)
+model$flags<-flags
+
+conds<-list(NULL,NULL,NULL)
+names(conds)<-c("size.matrix","mig.matrix","time.matrix")
+conds$size.matrix<-.e$size.matrix
+conds$mig.matrix<-.e$mig.matrix
+conds$time.matrix<-.e$time.matrix
+
+model$conds<-conds
+
+
+model[[1]]<-gsub("uniform","runif",model[[1]])
+model[[1]]<-gsub("normal","rtnorm",model[[1]])
+
+for(i in c(1,2,5)){
+  model[[3]][[i]]<-gsub("uniform","runif",model[[3]][[i]])
+  model[[3]][[i]]<-gsub("normal","rtnorm",model[[3]][[i]])
+}
+for(i in 3:4){
+  for(j in 1:2){
+    model[[3]][[i]][[j]]<-gsub("uniform","runif",model[[3]][[i]][[j]])
+    model[[3]][[i]][[j]]<-gsub("normal","rtnorm",model[[3]][[i]][[j]])
+  }
+}
+
+rm(list=ls(envir=.e),envir=.e)
 return(model)
 }
 

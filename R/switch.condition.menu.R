@@ -1,20 +1,27 @@
 
 switch.condition.menu<-function(){
-  switch(letter,
+  switch(letter, 
          
          s = {place.size.condition()},
+         
+         m = {place.mig.condition()},
          
          t = {place.time.condition()},
               
          
-         M = {print(size.matrix)
-              paste("--------")
-              condition.menu()},
+         "1" = {print(.e$size.matrix)
+                print("-----------------")
+                condition.menu()},
          
-         m = {print(time.matrix)
-              paste("--------")
-              condition.menu()},
+         "2" = {print(.e$mig.matrix)
+                print("-----------------")
+                condition.menu()},
          
-         B = {main.menu()},    
+         "3" = {print(.e$time.matrix)
+                print("-----------------")
+                condition.menu()},
+         
+         B = {sys.frame(which = 0)
+              main.menu()}    
          
          )}

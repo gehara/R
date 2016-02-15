@@ -1,57 +1,59 @@
 
 switch.mig.menu<-function(){
-  ma<-.e$ma
-  if(exists(".e$ema"))
-    ema<-.e$ema
+  
   switch(letter,
-         A = {prior.dist.mig<-readline("Migration prior distribution (normal or uniform?): ")
-              for(i in 1:length(ma)){
-                ma[[i]][3]<-prior.dist.mig
-              }
-              .e$ma<-ma
-              if(exists("ema",envir=.e)){
-                prior.dist.mig<-prior.dist.mig
-                for(i in 1:length(ema)){
-                  ema[[i]][3]<-prior.dist.mig
-                }
-              .e$ema<-ema
-              }  
-              mig.menu()},
-         P = {for(i in 1:length(ma)){
-              if(ma[[i]][3]=="normal"){
-              ma[[i]][1]<-readline(paste("migration prior (4Nm)",names(ma[i]),"mean: "))
-              ma[[i]][2]<-readline(paste("migration prior (4Nm)",names(ma[i]),"Standard Deviation: "))
-              }
-              if(ma[[i]][3]=="uniform"){
-              ma[[i]][1]<-readline(paste("migration prior (4Nm)",names(ma[i]),"min: "))
-              ma[[i]][2]<-readline(paste("migration prior (4Nm)",names(ma[i]),"max: "))
-              }
-              .e$ma<-ma}
-              
-              if(exists("ema",envir=.e)){
-              for(i in 1:length(ema)){
-                if(ema[[i]][3]=="normal"){
-                  ema[[i]][1]<-readline(paste("migration prior (4Nm)",names(ema[i]),"mean: "))
-                  ema[[i]][2]<-readline(paste("migration prior (4Nm)",names(ema[i]),"Standard Deviation: "))
-                }
-                if(ema[[i]][3]=="uniform"){
-                  ema[[i]][1]<-readline(paste("migration prior (4Nm)",names(ema[i]),"min: "))
-                  ema[[i]][2]<-readline(paste("migration prior (4Nm)",names(ema[i]),"max: "))
-                }
-              .e$ema<-ema}
-              }
-              mig.menu()},
-         M = {anc.mig<-readline("Different ancestral migration (YES or NO?): ")
-              if(anc.mig=="YES"){
-                anc.mig.par()
-                mig.menu()
-                } else if (exists("ema")){
-                rm(ema, envir=.e)
-                mig.menu()
-              } else {
-                mig.menu()
-              }},
          
-         B = {main.menu()},)
+         M = {prior.dist.mig<-readline("Migration prior distribution (normal or uniform?): ")
+         while (prior.dist.mig %in% c("normal","uniform")==F){
+           print("Possible distributions are normal or uniform!")
+           prior.dist.mig<-readline("Migration prior distribution: ")
+         }
+         .e$m[,6]<-prior.dist.mig
+         if(exists("em",envir=.e)){
+           .e$em$size[,6]<-prior.dist.mig
+         }
+         mig.menu()},
+         
+         D = {anc.mig<-readline("Different ancestral migration (YES or NO?): ")
+         if(anc.mig %in% .e$YES){
+           anc.mig.par()
+           sys.frame(which=.e$mig.env)
+           mig.menu()
+         } else if (exists("em",envir=.e)){
+           rm(em, envir=.e)
+           sys.frame(which=.e$mig.env)
+           mig.menu()
+         } else {
+           sys.frame(which=.e$mig.env)
+           mig.menu()
+         }},
+         
+         P = {xrow<-as.numeric(readline("Which parameter do you want to set up? (write the reference number from the menu): "))
+              if(.e$m[1,6]=="normal"){
+              .e$m[xrow,4]<-readline(paste("migration prior (4Nm)",.e$m[xrow,1],"mean: "))
+              .e$m[xrow,5]<-readline(paste("migration prior (4Nm)",.e$m[xrow,1],"Standard Deviation: "))
+              }
+              if(.e$m[1,6]=="uniform"){
+              .e$m[xrow,4]<-readline(paste("migration prior (4Nm)",.e$m[xrow,1],"min: "))
+              .e$m[xrow,5]<-readline(paste("migration prior (4Nm)",.e$m[xrow,1],"max: "))
+              }
+         sys.frame(which=.e$mig.env)
+              mig.menu()},
+              
+          A = {xrow<-readline("Which parameter do you want to set up? (write the reference number from the menu): ")
+              if(.e$m[1,6]=="normal"){
+                .e$em$size[xrow,4]<-readline(paste("migration prior (4Nm)",.e$em$size[xrow,1],"mean: "))
+                .e$em$size[xrow,5]<-readline(paste("migration prior (4Nm)",.e$em$size[xrow,1],"Standard Deviation: "))
+                }
+                if(.e$m[1,6]=="uniform"){
+                  .e$em$size[xrow,4]<-readline(paste("migration prior (4Nm)",.e$em$size[xrow,1],"min: "))
+                  .e$em$size[xrow,5]<-readline(paste("migration prior (4Nm)",.e$em$size[xrow,1],"max: "))
+                }
+          sys.frame(which=.e$mig.env)
+          mig.menu()
+              },
+              
+         B = {sys.frame(which=.e$env)
+           main.menu()})
   
 }

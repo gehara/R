@@ -1,55 +1,36 @@
 
 anc.Ne.par<-function(){
+  anc.Ne.par<-NULL
+  time.anc.Ne.par<-NULL
+  pop<-NULL
+  for (i in 1:nrow(.e$n)){
+      n.anc.pop<-readline(paste("How many changes in Ne for pop ",i,"?",sep=""))
+      if (n.anc.pop==0){
+        } else (
+          for (j in 1:n.anc.pop){
+            Ne.par<-paste("Ne",j,".pop",i,sep="")
+            anc.Ne.par<-c(anc.Ne.par,Ne.par)
+            time.Ne.par<-paste("t.Ne",j,".pop",i,sep="")
+            time.anc.Ne.par<-c(time.anc.Ne.par,time.Ne.par)
+            pop<-c(pop,i)
+            }
+          )
+  }
   
-  if(hist.demog=="NO"){
+  .e$en$size<-matrix(nrow=length(anc.Ne.par),ncol=6)
+  .e$en$size[,1]<-anc.Ne.par
+  .e$en$size[,2]<-'-en'
+  .e$en$size[,3]<-pop
+  .e$en$size[,4]<-1000
+  .e$en$size[,5]<-10000
+  .e$en$size[,6]<-'uniform'  
     
-      if(exists("enNe", envir=.e)){
-        rm(enNe, envir=.e)
-        rm(ent, envir=.e)
-        
-      } else {} 
-  }
-    
-  if (hist.demog=="YES"){
-    
-    if(exists("enNe", envir=.e)){
-    } else {
-      time.anc.Ne.par<-NULL 
-      anc.Ne.par<-NULL
-        for (i in 1:npops){
-        n.anc.pop<-readline(paste("How many changes in Ne for pop",i,"?",sep=""))
-            if (n.anc.pop<1){
-            } else (
-                for (j in 1:n.anc.pop){
-                Ne.par<-paste("Ne",j,".pop",i,sep="")
-                anc.Ne.par<-c(anc.Ne.par,Ne.par)
-                time.Ne.par<-paste("time.Ne",j,".pop",i,sep="")
-                time.anc.Ne.par<-c(time.anc.Ne.par,time.Ne.par)
-                }
-              )
-        }
-    n.Ne.par<-as.numeric(length(anc.Ne.par))
-    pop.sizes<-vector(mode="list", length=n.Ne.par)
-    names(pop.sizes)<-anc.Ne.par
-    time.pop.sizes<-vector(mode="list", length=n.Ne.par)
-    names(time.pop.sizes)<-time.anc.Ne.par
-    
-        for(i in 1:length(pop.sizes)){
-        pop.sizes[[i]][1]<-10000
-        pop.sizes[[i]][2]<-100000
-        pop.sizes[[i]][3]<-"uniform"
-        time.pop.sizes[[i]][1]<-10000
-        time.pop.sizes[[i]][2]<-100000
-        time.pop.sizes[[i]][3]<-"uniform"
-        }
-    enNe<<-pop.sizes
-    ent<<-time.pop.sizes
-            
-    }
-  } else {
-    hist.demog<<-"NO"
-    if(exists("en", envir=.e)){
-      rm(en, envir=.e)}
-    main.menu()
-  }
+  .e$en$time<-matrix(nrow=length(anc.Ne.par),ncol=6)
+  .e$en$time[,1]<-time.anc.Ne.par
+  .e$en$time[,2]<-'-en'
+  .e$en$time[,3]<-pop
+  .e$en$time[,4]<-10000
+  .e$en$time[,5]<-100000
+  .e$en$time[,6]<-'uniform'
 }
+

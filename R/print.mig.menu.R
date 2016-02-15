@@ -1,23 +1,20 @@
 print.mig.menu<-function()
   {
   
-  if(ma[[1]][3]=="normal")
-    dist.par<-"Mean, SD"
-  if(ma[[1]][3]=="uniform")
-    dist.par<-"min, max"
-  if(exists("ema")){
-    anc.mig<-"YES"
-  }else{
-    anc.mig<-"NO"
-  }
+  if(.e$m[1,6]=="normal")
+    dist.par<-"Mean - SD"
+  if(.e$m[1,6]=="uniform")
+    dist.par<-"Min - Max"
   
-  cat(paste("A > Migration prior distribution:       ",ma[[1]][3]),
-      paste("M > Different ancestral migration?         ",anc.mig),
-      paste("P > priors                          c(",dist.par,")"),
-      paste("                    ",names(ma),"     ",ma),
+  cat(paste("M > Migration prior distribution:       ",.e$m[1,6]),
+      paste("D > Different ancestral migration?         ",exists("em",envir=.e)),
+      paste("P > priors                          ",dist.par),
+      paste("                    ",c(1:nrow(.e$m))," ",.e$m[,1],"  ",.e$m[,4]," ",.e$m[,5]),
       paste(" "),
-      if(exists("ema"))
-        paste("  ancestral migrations   ",names(ema),"    ",ema),
+      if(exists("em", envir=.e))
+        paste("A >  ancestral migrations:         ",dist.par),
+      if(exists("em", envir=.e))
+      paste("                    ",c(1:nrow(.e$em$size))," ",.e$em$size[,1],"  ",.e$em$size[,4]," ",.e$em$size[,5]),
       paste("B > Back to main menu"),
       sep="\n")
 }

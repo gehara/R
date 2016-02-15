@@ -1,73 +1,60 @@
 
 switch.demog.menu<-function(){
-  n<-.e$n
-  ejNe<-.e$ejNe
-  enNe<-.e$enNe
+  
   switch(letter,
          A = {prior.dist.Ne<-readline("Ne prior distribution (normal or uniform): ")
-              
-              for(i in 1:length(n)){
-                n[[i]][3]<-prior.dist.Ne
-              }
-              for(i in 1:length(ejNe)){
-                ejNe[[i]][3]<-prior.dist.Ne
-              }
-              if(exists("enNe", envir=.e)){
-              for(i in 1:length(enNe)){
-                enNe[[i]][3]<-prior.dist.Ne
-              }
-              .e$enNe<-enNe
-              } else {}
-              .e$n<-n
-              .e$ejNe<-ejNe
-                          
-              demog.menu()},
+         while (prior.dist.Ne %in% c("normal","uniform")==F){
+           print("Possible distributions are normal or uniform!")
+           prior.dist.Ne<-readline("Ne prior distribution: ")
+         }
+         .e$n[,6]<-prior.dist.Ne
+         if(exists("en",envir=.e)){
+           .e$en$size[,6]<-prior.dist.Ne
+         }
+         sys.frame(which=0)
+         demog.menu()},
          
-         P = {
-           for(i in 1:length(n)){
-           if(n[[i]][3]=="normal"){
-             n[[i]][1]<-readline(paste("Ne prior (2N)",names(n[i]),"mean: "))
-             n[[i]][2]<-readline(paste("Ne prior (2N)",names(n[i]),"Standard Deviation: "))
-           }
-           if(n[[i]][3]=="uniform"){
-             n[[i]][1]<-readline(paste("Historical Ne prior (2N)",names(n[i]),"min: "))
-             n[[i]][2]<-readline(paste("Historical Ne prior (2N)",names(n[i]),"max: "))
-           }
-           }
-           for(i in 1:length(ejNe)){
-            if(ejNe[[i]][3]=="normal"){
-              ejNe[[i]][1]<-readline(paste("Ne prior (2N)",names(ejNe[i]),"mean: "))
-              ejNe[[i]][2]<-readline(paste("Ne prior (2N)",names(ejNe[i]),"Standard Deviation: "))
-              }
-            if(ejNe[[i]][3]=="uniform"){
-             ejNe[[i]][1]<-readline(paste("Historical Ne prior (2N)",names(ejNe[i]),"min: "))
-             ejNe[[i]][2]<-readline(paste("Historical Ne prior (2N)",names(ejNe[i]),"max: "))
-              }
-            }
-           .e$ejNe<-ejNe
-           .e$n<-n
+         N = {anc.Ne<-readline("Different ancestral NE (YES or NO?): ")
+         if(anc.Ne %in% .e$YES){
+           anc.Ne.par()
            demog.menu()
+         } else if (exists("en",envir=.e)){
+           rm(en, envir=.e)
+           demog.menu()
+         } else {
+           sys.frame(which=0)
+           demog.menu()
+         }},
+         
+         P = {xrow<-as.numeric(readline("Which parameter do you want to set up? (write the reference number from the menu): "))
+         if(.e$n[1,6]=="normal"){
+           .e$n[xrow,4]<-readline(paste("Ne prior (4Nm)",.e$n[xrow,1],"mean: "))
+           .e$n[xrow,5]<-readline(paste("Ne prior (4Nm)",.e$n[xrow,1],"Standard Deviation: "))
+         }
+         if(.e$n[1,6]=="uniform"){
+           .e$n[xrow,4]<-readline(paste("Ne prior (4Nm)",.e$n[xrow,1],"min: "))
+           .e$n[xrow,5]<-readline(paste("Ne prior (4Nm)",.e$n[xrow,1],"max: "))
+         }
+         sys.frame(which=0)
+         demog.menu()
            },
            
            
-         p = {  
-              for(i in 1:length(enNe)){
-                if(enNe[[i]][3]=="normal"){
-                enNe[[i]][1]<-readline(paste("Historical Ne prior (2N)",names(enNe[i]),"mean: "))
-                enNe[[i]][2]<-readline(paste("Historical Ne prior (2N)",names(enNe[i]),"Standard Deviation: "))
-                }
-                if(enNe[[i]][3]=="uniform"){
-                enNe[[i]][1]<-readline(paste("Historical Ne prior (2N)",names(enNe[i]),"min: "))
-                enNe[[i]][2]<-readline(paste("Historical Ne prior (2N)",names(enNe[i]),"max: "))
-                }
-              }
-              .e$enNe<-enNe
-              demog.menu()},
+         A = {xrow<-readline("Which parameter do you want to set up? (write the reference number from the menu): ")
+         if(.e$n[1,6]=="normal"){
+           .e$en$size[xrow,4]<-readline(paste("Ancestral Ne prior (4Nm)",.e$en$size[xrow,1],"mean: "))
+           .e$en$size[xrow,5]<-readline(paste("Ancestral Ne prior (4Nm)",.e$en$size[xrow,1],"Standard Deviation: "))
+         }
+         if(.e$n[1,6]=="uniform"){
+           .e$en$size[xrow,4]<-readline(paste("Ancestral Ne prior (4Nm)",.e$en$size[xrow,1],"min: "))
+           .e$en$size[xrow,5]<-readline(paste("Ancestral Ne prior (4Nm)",.e$en$size[xrow,1],"max: "))
+         }
+         sys.frame(which=0)
+         demog.menu()
+         },
          
-         B = {main.menu()}
-         
-         
-         )
+         B = {sys.frame(which=0)
+           main.menu()})
   
 }
 

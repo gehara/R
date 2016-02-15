@@ -2,8 +2,9 @@
 
 anc.mig.par<-function(){
   mig.par<-NULL
-  for(i in 1:npops){
-    for(j in 1:npops){
+  pops<-NULL
+  for(i in 1:nrow(.e$n)){
+    for(j in 1:nrow(.e$n)){
       if(i==j){
        }else{ x<-readline(paste("How many changes in migration for mig",i,"_",j,": ",sep=""))
         if(x==0){
@@ -11,36 +12,33 @@ anc.mig.par<-function(){
            for(l in 1:x){
               m<-paste("mig",l,".",i,"_",j,sep="")
               mig.par<-c(mig.par,m)
+              pops<-c(pops,paste(i,j))
         }
        }
       }
      }
     }
   
-  n.mig.par<-as.numeric(length(mig.par))
-  migration<-vector(mode="list", length=n.mig.par)
-  names(migration)<-mig.par
+  .e$em$size<-matrix(nrow=length(mig.par),ncol=6)
+  .e$em$size[,1]<-mig.par
+  .e$em$size[,2]<-"-em"
+  .e$em$size[,3]<-pops
+  .e$em$size[,4]<-0
+  .e$em$size[,5]<-0
+  .e$em$size[,6]<-'uniform'
   
   t.mig.par<-mig.par
-  for(i in 1:length(mig.par)){
-    t.mig.par[i]<-paste("t.",mig.par[1],sep="")
+  for(i in 1:length(t.mig.par)){
+    t.mig.par[i]<-paste("t.",mig.par[i],sep="")
   }
   
-  t.migration<-migration
-  names(t.migration)<-t.mig.par
-  for(i in 1:length(t.migration)){
-    t.migration[[i]][1]<-0
-    t.migration[[i]][2]<-0
-    t.migration[[i]][3]<-"uniform"
-  }
+  .e$em$time<-matrix(nrow=length(t.mig.par),ncol=6)
+  .e$em$time[,1]<-t.mig.par
+  .e$em$time[,2]<-"-em"
+  .e$em$time[,3]<-pops
+  .e$em$time[,4]<-0
+  .e$em$time[,5]<-0
+  .e$em$time[,6]<-'uniform'
   
-  for(i in 1:length(migration)){
-    migration[[i]][1]<-0
-    migration[[i]][2]<-0
-    migration[[i]][3]<-"uniform"
-  }
-  
-  .e$ema<-migration
-  .e$emat<-t.migration
 }
   

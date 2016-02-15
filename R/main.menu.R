@@ -5,11 +5,11 @@ library(ape)
 
 main.menu<-function()
   {
-  
+  .GlobalEnv$env<-parent.frame()
   if(exists("tree", envir=.e)){
-  
-    }else{join.par()
-      cur.Ne.par()}
+  }else{join.par()}
+  if(exists("n", envir=.e)){
+  }else{cur.Ne.par()}
   
   print.main.menu()  
 

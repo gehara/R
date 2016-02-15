@@ -1,26 +1,26 @@
 
 print.main.menu<-function(){
     
-    
-{cat(paste("A > Number of populations to simulate     ",length(.e$n[,1])),
+{cat(paste("A > Number of populations to simulate     ",nrow(.e$n)),
      paste("B > Tree                                  ",.e$tree),
-     paste("    Number of nodes (junctions)           ",length(.e$ej[,1])),
+     paste("    Number of nodes (junctions)           ",nrow(.e$ej)),
      paste("C > Migration                             ",exists("m",envir=.e)),
      paste("D > Pop size change through time          ",exists("en",envir=.e)),
-     paste("n > Setup Ne priors"),
-     paste("    Population size parameters (total)    ",length(.e$n[,1])+length(.e$en[,1])),
-     paste("    current Ne parameters                 ",length(.e$n[,1])),
-     paste("    ancestral Ne parameters               ",length(.e$en$size[,1])),
-     paste("m > Setup Migration priors"),
-     paste("    current migration                     ",length(.e$m[,1])),
-     paste("    ancestral migration parameters        ",length(.e$em$size[,1])),
-     paste("t > Setup time priors "),
-     paste("    time of join parameters               ",length(.e$j[,1])),
-     paste("    time of Ne change parameters          ",length(.e$en$time[,1])),
-     paste("    time of Migration change parameters   ",length(.e$em$time[,1])),
-     paste("X > Conditions"),
+     paste("E > Setup Ne priors"),
+     paste("    Population size parameters (total)    ",sum(nrow(.e$n),nrow(.e$en$size))),
+     paste("    current Ne parameters                 ",nrow(.e$n)),
+     paste("    ancestral Ne parameters               ",sum(nrow(.e$en$size))),
+     paste("F > Setup Migration priors"),
+     paste("    current migration                     ",sum(nrow(.e$m))),
+     paste("    ancestral migration parameters        ",sum(nrow(.e$em$size))),
+     paste("G > Setup time priors "),
+     paste("    time of join parameters               ",sum(nrow(.e$ej))),
+     paste("    time of Ne change parameters          ",sum(nrow(.e$en$time))),
+     paste("    time of Migration change parameters   ",sum(nrow(.e$em$time))),
+     paste("H > Conditions"),
+     paste("I > Gene setup"),
      paste("Q > Quit, my model is Ready!"),
      sep="\n")
-}
+  }
 }
 

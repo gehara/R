@@ -1,34 +1,38 @@
 
 
 condition.matrix<-function(){
-size<-.e$n
-if(exists("enNe", envir=.e)){
-size<-c(size,.e$enNe)
+size<-.e$n[,1]
+time<-.e$ej[,1]
+
+if(exists("m",envir=.e)){
+  mig<-.e$m[,1]
 }
-size<-c(size,.e$ejNe)
-size<-c(size,.e$ma)
-if(exists("ema", envir=.e)){
-size<-c(size,.e$ema)
+
+if(exists("en", envir=.e)){
+size<-c(size,.e$en$size[,1])
+time<-c(time,.e$en$time[,1])
 }
-size.matrix<-matrix(nrow=length(size),ncol=length(size))
-colnames(size.matrix)<-names(size)
-rownames(size.matrix)<-names(size)
-diag(size.matrix)<-0
+
+if(exists("em", envir=.e)){
+  mig<-c(mig,.e$em$size[,1])
+  time<-c(time,.e$em$time[,1])
+}
 
 
-time<-.e$ejt
-if(exists("ejt", envir=.e)){
-time<-c(time,.e$ent)
-}
-if(exists("emat",envir=.e)){
-time<-c(time,.e$emat)
-}
-time.matrix<-matrix(nrow=length(time),ncol=length(time))
-colnames(time.matrix)<-names(time)
-rownames(time.matrix)<-names(time)
-diag(time.matrix)<-0
+.e$size.matrix<-matrix(nrow=length(size),ncol=length(size))
+colnames(.e$size.matrix)<-size
+rownames(.e$size.matrix)<-size
+#diag(.e$size.matrix)<-0
 
-.e$time.matrix<-time.matrix
-.e$size.matrix<-size.matrix
+if(exists("mig")){
+.e$mig.matrix<-matrix(nrow=length(mig),ncol=length(mig))
+colnames(.e$mig.matrix)<-mig
+rownames(.e$mig.matrix)<-mig
+}
+
+.e$time.matrix<-matrix(nrow=length(time),ncol=length(time))
+colnames(.e$time.matrix)<-time
+rownames(.e$time.matrix)<-time
+#diag(time.matrix)<-0
 }
 

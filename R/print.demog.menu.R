@@ -7,13 +7,13 @@ print.demog.menu<-function()
   
   cat(paste("A > Ne prior distribution:              ",.e$n[1,6]),
       paste("N > Different ancestral Ne?             ",exists("en",envir=.e)),
-      paste("P > main Ne priors                  c(",dist.par,")"),
-      paste("                ",.e$n[,1],"      ",.e$n[,4],"     ",.e$n[,5]),
+      paste("P > main Ne priors                      ",dist.par),
+      paste("                ",c(1:nrow(.e$n))," ",.e$n[,1],"      ",.e$n[,4],"     ",.e$n[,5]),
       paste(" "),
       if(exists("en",envir=.e))
       paste("     -- ancestral Ne: "),
       if(exists("en",envir=.e))
-      paste("                ",.e$en[,1],"      ",.e$n[,4],"    ",.e$n[,5]),
+      paste("                ",c(1:nrow(.e$en$size))," ",.e$en$size[,1],"      ",.e$en$size[,4],"    ",.e$en$size[,5]),
       paste("B > Back to Ne menu"),
       sep="\n")
 }
