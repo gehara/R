@@ -36,8 +36,8 @@ anc.mig.par<-function(){
   .e$em$time[,1]<-t.mig.par
   .e$em$time[,2]<-"-em"
   .e$em$time[,3]<-pops
-  .e$em$time[,4]<-0
-  .e$em$time[,5]<-0
+  .e$em$time[,4]<-20000
+  .e$em$time[,5]<-10000
   .e$em$time[,6]<-'uniform'
   
 }

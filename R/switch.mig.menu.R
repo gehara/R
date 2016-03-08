@@ -12,21 +12,17 @@ switch.mig.menu<-function(){
          if(exists("em",envir=.e)){
            .e$em$size[,6]<-prior.dist.mig
          }
+         sys.call(which=-1)
          mig.menu()},
          
          D = {anc.mig<-readline("Different ancestral migration (YES or NO?): ")
          if(anc.mig %in% .e$YES){
            anc.mig.par()
-           sys.frame(which=.e$mig.env)
-           mig.menu()
-         } else if (exists("em",envir=.e)){
+           } else if (exists("em",envir=.e)){
            rm(em, envir=.e)
-           sys.frame(which=.e$mig.env)
-           mig.menu()
-         } else {
-           sys.frame(which=.e$mig.env)
-           mig.menu()
-         }},
+          } 
+         sys.call(which=-1)
+         mig.menu()},
          
          P = {xrow<-as.numeric(readline("Which parameter do you want to set up? (write the reference number from the menu): "))
               if(.e$m[1,6]=="normal"){
@@ -37,8 +33,8 @@ switch.mig.menu<-function(){
               .e$m[xrow,4]<-readline(paste("migration prior (4Nm)",.e$m[xrow,1],"min: "))
               .e$m[xrow,5]<-readline(paste("migration prior (4Nm)",.e$m[xrow,1],"max: "))
               }
-         sys.frame(which=.e$mig.env)
-              mig.menu()},
+         sys.call(which=-1)
+         mig.menu()},
               
           A = {xrow<-readline("Which parameter do you want to set up? (write the reference number from the menu): ")
               if(.e$m[1,6]=="normal"){
@@ -49,11 +45,10 @@ switch.mig.menu<-function(){
                   .e$em$size[xrow,4]<-readline(paste("migration prior (4Nm)",.e$em$size[xrow,1],"min: "))
                   .e$em$size[xrow,5]<-readline(paste("migration prior (4Nm)",.e$em$size[xrow,1],"max: "))
                 }
-          sys.frame(which=.e$mig.env)
-          mig.menu()
-              },
+          sys.call(which=-1)
+          mig.menu()},
               
-         B = {sys.frame(which=.e$env)
+         B = {sys.call(which=-1)
            main.menu()})
   
 }

@@ -8,5 +8,4 @@ x<-grep(cond[[1]][3],colnames(.e$size.matrix))
 .e$size.matrix[y,x]<-cond[[1]][2]
 .e$size.matrix<-inv.mirror.lower(.e$size.matrix)
 
-condition.menu()
 }

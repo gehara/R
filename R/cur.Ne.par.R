@@ -8,8 +8,8 @@ cur.Ne.par<-function(){
   .e$n[,1]<-list.Ne.pars
   .e$n[,2]<-'-n'
   .e$n[,3]<-c(1:length(list.Ne.pars))
-  .e$n[,4]<-10000
-  .e$n[,5]<-100000
+  .e$n[,4]<-100000
+  .e$n[,5]<-500000
   .e$n[,6]<-"uniform"
   
 }

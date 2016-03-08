@@ -8,5 +8,4 @@ place.mig.condition<-function(){
   .e$mig.matrix[y,x]<-cond[[1]][2]
   .e$mig.matrix<-inv.mirror.lower(.e$mig.matrix)
   
-  condition.menu()
 }

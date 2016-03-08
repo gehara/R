@@ -13,6 +13,7 @@ switch.time.menu<-function(){
          if(exists("em",envir=.e)){
            .e$em$time[,6]<-prior.dist.Ne
          }
+         sys.call(which = -1)
         time.menu()},
          
          j = {xrow<-as.numeric(readline("Which parameter do you want to set up? (write the reference number from the menu): "))
@@ -24,6 +25,7 @@ switch.time.menu<-function(){
            .e$ej[xrow,4]<-readline(paste("Time of junction in generations",.e$ej[xrow,1],"min: "))
            .e$ej[xrow,5]<-readline(paste("Time of junction in generations",.e$ej[xrow,1],"max: "))
          }
+         sys.call(which = -1)
            time.menu()},
            
           n = {xrow<-as.numeric(readline("Which parameter do you want to set up? (write the reference number from the menu): "))
@@ -35,6 +37,7 @@ switch.time.menu<-function(){
             .e$en$time[xrow,4]<-readline(paste("Time of Ne change in generations",.e$en$time[xrow,1],"min: "))
             .e$en$time[xrow,5]<-readline(paste("Time of Ne change in generations",.e$en$time[xrow,1],"max: "))
           }
+          sys.call(which = -1)
           time.menu()
            },
            
@@ -48,10 +51,11 @@ switch.time.menu<-function(){
            .e$em$time[xrow,4]<-readline(paste("Time of mig change in generations",.e$em$time[xrow,1],"min: "))
            .e$em$time[xrow,5]<-readline(paste("Time of mig change in generations",.e$em$time[xrow,1],"max: "))
          }
+         sys.call(which = -1)
          time.menu()},
          
-         B = {sys.frame(which=.e$env)
-              main.menu()})
+         B = {sys.call(which = -1)
+           main.menu()})
   
 }
 

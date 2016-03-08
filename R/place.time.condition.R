@@ -8,6 +8,5 @@ x<-grep(cond[[1]][3],colnames(.e$time.matrix))
 .e$time.matrix[y,x]<-cond[[1]][2]
 .e$time.matrix<-inv.mirror.lower(.e$time.matrix)
 
-condition.menu()
 }
 

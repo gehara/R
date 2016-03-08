@@ -1,4 +1,4 @@
-sample.pars<-function()
+samples.par<-function()
 {
   
   tot.gene.par<-NULL

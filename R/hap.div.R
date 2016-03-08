@@ -14,8 +14,9 @@ H.div<-function(x){
     }
   
   H.d = (nrow(x)/(nrow(x)-1))*(1 - sum(h.freqs^2))
-  return(H.d)
+  return(c(n.hap,H.d))
 }
+
 
 
 

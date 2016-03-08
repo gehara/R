@@ -5,15 +5,15 @@ print.demog.menu<-function()
   if(.e$n[1,6]=="uniform")
     dist.par<-"min, max"
   
-  cat(paste("A > Ne prior distribution:              ",.e$n[1,6]),
-      paste("N > Different ancestral Ne?             ",exists("en",envir=.e)),
-      paste("P > main Ne priors                      ",dist.par),
+  cat(paste("1 > Ne prior distribution:              ",.e$n[1,6]),
+      paste("2 > Different ancestral Ne?             ",exists("en",envir=.e)),
+      paste("3 > current Ne priors                      ",dist.par),
       paste("                ",c(1:nrow(.e$n))," ",.e$n[,1],"      ",.e$n[,4],"     ",.e$n[,5]),
       paste(" "),
       if(exists("en",envir=.e))
-      paste("     -- ancestral Ne: "),
+      paste("4 > ancestral Ne priors"),
       if(exists("en",envir=.e))
       paste("                ",c(1:nrow(.e$en$size))," ",.e$en$size[,1],"      ",.e$en$size[,4],"    ",.e$en$size[,5]),
-      paste("B > Back to Ne menu"),
+      paste("B > Back to main menu"),
       sep="\n")
 }
