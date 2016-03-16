@@ -1,2 +1,2 @@
-# R
+# PipeMaster
 my R scripts repository
