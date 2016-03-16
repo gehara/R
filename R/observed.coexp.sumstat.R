@@ -1,4 +1,8 @@
-observed.coexp.sumstat<-function(path.to.fasta,fasta.files=list.files()){
+observed.coexp.sumstat<-function(path.to.fasta){
+  setwd(path.to.fasta)
+  fasta.files<-list.files()
+  fasta.files<-fasta.files[grep(".fas",fasta.files)]
+  fasta.files<-c(fasta.files,fasta.files[grep(".fasta",fasta.files)])
   
   ms.output<-fasta2ms(path.to.fasta,fasta.files,write.file=F)
   bp.length<-list()

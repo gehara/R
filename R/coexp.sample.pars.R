@@ -11,7 +11,7 @@ coexp.sample.pars<-function(nruns,
   nspecies<-nrow(Ne.prior)
   
   for(i in 1:nspecies){
-    mat<-matrix(nrow=nruns,ncol=3)
+    mat<-matrix(nrow=nruns,ncol=4)
     MS.par[[i]]<-mat
   }
   for(j in 1:nruns){
@@ -46,16 +46,17 @@ coexp.sample.pars<-function(nruns,
       Ne.EXP.t <- time.prior.B[i,3]/time.prior[i,5] #corrects by generations
       theta.A.ratio <- runif(1, NeA.prior[i,3], NeA.prior[i,4])# thetaA (NeA) ratio  
       NeA <- Ne*theta.A.ratio
-      mi <- runif(1,gene.prior[i,3],gene.prior[i,4])
-      
-      theta=4*Ne*mi*gene.prior[i,5]*gene.prior[i,7]
+      mi <- do.call(as.character(gene.prior[i,2]),args=list(1,gene.prior[i,3],gene.prior[i,4]),quote=F)
+      Ne <- Ne*gene.prior[i,7]
+      theta=4*Ne*mi*gene.prior[i,5]
       scalar=4*Ne
       EXP.time=Ne.EXP.t/scalar
-      #g.rate=-log(NeA/Ne)/Ne.EXP.t
       
-      ms.par<-cbind(theta,EXP.time,theta.A.ratio)
+      g.rate=-log(NeA/Ne)/Ne.EXP.t
+      
+      ms.par<-cbind(theta,EXP.time,theta.A.ratio,g.rate)
+      
       MS.par[[i]][j,]<-ms.par
-      
       
     }
     #print(j)

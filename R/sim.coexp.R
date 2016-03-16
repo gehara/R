@@ -5,6 +5,7 @@ sim.coexp<-function(nsims,
                     NeA.prior,
                     time.prior,
                     gene.prior,
+                    alpha=F,
                     append.sims=F,
                     path=getwd())
 {
@@ -30,7 +31,7 @@ sim.coexp<-function(nsims,
     x<-coexp.sample.pars(nruns=1,var.zeta=var.zeta,coexp.prior=coexp.prior,Ne.prior=Ne.prior,
                          NeA.prior=NeA.prior,time.prior=time.prior,gene.prior=gene.prior)
     
-    y<-coexp.MS(MS.par=x$MS.par, gene.prior = gene.prior)
+    y<-coexp.MS(MS.par=x$MS.par, gene.prior = gene.prior,alpha=alpha)
     
     z<-coexp.sumstat(ms.output=y,gene.prior=gene.prior)
     

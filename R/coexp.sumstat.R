@@ -1,35 +1,34 @@
 coexp.sumstat<-function(ms.output,gene.prior){
 sum.stat<-NULL
 
-  for (j in 1:length(ms.output)){
-    if(ms.output[[j]][3]=="segsites: 0"){
-      pi<-0
-      H<-c(0,0)
-      TD<-0
-    }else{
-    x<-ms.output[[j]][5:length(ms.output[[j]])]
-
-    x<-gsub("0","A",x)
-    x<-gsub("1","C",x)
-
-    se<-list(NULL,NULL,NULL,NULL)
-    names(se)<-c("nb","seq","nam","com")
-    se$nb<-length(x)
-    se$seq<-x
-    se$nam<-c(1:length(x))
-    se$com<-NA
-    class(se)<-"alignment"
-    x<-as.DNAbin(se)
-
-    pi<-nuc.div(x)/gene.prior[j,5]
-    TD<-tajima.test(x)$D
-     H<-H.div(x)
-
-    }
-    ss<-c(pi[[1]],H,TD[1])
-    sum.stat<-rbind(sum.stat,ss)
-    }
-    
+for (j in 1:length(ms.output)){
+  
+  ss<-as.numeric(strsplit(ms.output[[j]][3]," ")[[1]][2])
+  if(ss==0){
+  pi=0
+  H=c(0,0)
+  TD<-NA
+  } else {
+  x<-ms.output[[j]][5:length(ms.output[[j]])]
+  x<-gsub("0","A",x)
+  x<-gsub("1","C",x)
+  se<-list(NULL,NULL,NULL,NULL)
+  names(se)<-c("nb","seq","nam","com")
+  se$nb<-length(x) # number of samples
+  se$seq<-x # sequencies
+  se$nam<-c(1:length(x)) # sequence names, just numbers
+  se$com<-NA
+  class(se)<-"alignment" # this is alignment 
+  x<-as.DNAbin(se)
+  
+  pi<-nuc.div(x)*ss/gene.prior[j,5]
+  H<-H.div(x)
+  TD<-tajima.test(x)$D
+  
+  }
+  ss<-c(pi[[1]],H,TD[1])
+  sum.stat<-rbind(sum.stat,ss)
+}
 vari<-diag(var(sum.stat))
 means<-colMeans(sum.stat)
 skew<-NULL
@@ -45,4 +44,5 @@ h.s<-c(vari,means,skew,kur)
 #write.table(t(h.s),file="h.sum.stat.txt",col.names = F, row.names=F, append=T,sep="\t")  
 return(h.s)
 #return(sum.stat)
+
 }
