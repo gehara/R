@@ -1,11 +1,11 @@
 
-sim.snp.sumstat<-function(model,nsim.blocks,path=getwd(),append.sims=F,block.size=100){
+sim.snp.sumstat<-function(model,nsim.blocks,path=getwd(),append.sims=F,block.size=100, msABC.call="./msABC"){
   
   # set working directory
   setwd(path)
   
   if(append.sims==F){
-  com<-ms.commander.snp(model)
+  com<-ms.commander.snp(model,msABC=msABC.call)
   system(paste(com[[1]],"> out.txt"))
   S1<-read.table("out.txt",header = T)
   nam<-t(colnames(S1))
@@ -17,7 +17,7 @@ sim.snp.sumstat<-function(model,nsim.blocks,path=getwd(),append.sims=F,block.siz
   SS<-NULL
   param<-NULL
   for(i in 1:block.size){
-    com<-ms.commander.snp(model)
+    com<-ms.commander.snp(model,msABC=msABC.call)
     
     system(paste(com[[1]],"> out.txt"))
     S1<-read.table("out.txt",header = T)

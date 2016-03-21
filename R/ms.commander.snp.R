@@ -1,5 +1,5 @@
 
-ms.commander.snp<-function(model){
+ms.commander.snp<-function(model,msABC){
   
   # bing Ne, mig and Time priors
   size.pars<-rbind(model$flags$n,model$flags$en$size)
@@ -87,11 +87,11 @@ ms.commander.snp<-function(model){
   loci<-cbind(loci,4*Ne0*as.numeric(loci[,4])*as.numeric(loci[,2]))
   commands<-list(NULL)
   I1<-model$I
-  y<-paste("./msABC",sum(as.numeric(I1[,4:ncol(I1)])),ceiling(as.numeric(model$loci[,3])*(1-as.numeric(model$loci[,1]))),"-t",loci[1,7],paste(I1[1,2:ncol(I1)],collapse=" "),collapse=" ")
+  y<-paste(msABC,sum(as.numeric(I1[,4:ncol(I1)])),ceiling(as.numeric(model$loci[,3])*(1-as.numeric(model$loci[,1]))),"-t",loci[1,7],paste(I1[1,2:ncol(I1)],collapse=" "),collapse=" ")
   commands[[1]]<-paste(y,string,collapse=" ")
   
   I1[4:ncol(I1)]<-as.numeric(I1[4:ncol(I1)])-floor(as.numeric(model$I[,4:ncol(model$I)])*as.numeric(model$loci[,1]))
-  y<-paste("./msABC",sum(as.numeric(I1[,4:ncol(I1)])),ceiling(as.numeric(model$loci[,3])*(as.numeric(model$loci[,1]))),"-t",loci[1,7],paste(I1[1,2:ncol(I1)],collapse=" "),collapse=" ")
+  y<-paste(msABC,sum(as.numeric(I1[,4:ncol(I1)])),ceiling(as.numeric(model$loci[,3])*(as.numeric(model$loci[,1]))),"-t",loci[1,7],paste(I1[1,2:ncol(I1)],collapse=" "),collapse=" ")
   commands[[2]]<-paste(y,string,collapse=" ")
   
   commands[[3]]<-t(parameters)
