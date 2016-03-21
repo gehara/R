@@ -32,5 +32,5 @@ sim.snp.sumstat<-function(model,nsim.blocks,path=getwd(),append.sims=F,block.siz
   
   }
   write.table(SS,file="sumstat.txt",quote=F,row.names = F,col.names = F, append=T)
-  write.table(param,file="parameters.txt",quote=F,row.names = F,col.names = F, append=F,sep="\t")
+  write.table(param,file="parameters.txt",quote=F,row.names = F,col.names = F, append=T,sep="\t")
   }
