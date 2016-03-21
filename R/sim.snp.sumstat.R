@@ -10,7 +10,7 @@ sim.snp.sumstat<-function(model,nsim.blocks,path=getwd(),append.sims=F,block.siz
   S1<-read.table("out.txt",header = T)
   nam<-t(colnames(S1))
   write.table(nam,file="sumstat.txt",quote=F,row.names = F,col.names = F, append=F,sep="\t")
-  write.table(com[[3]][1,],file="parameters.txt",quote=F,row.names = F,col.names = F, append=F,sep="\t")
+  write.table(t(com[[3]][1,]),file="parameters.txt",quote=F,row.names = F,col.names = F, append=F,sep="\t")
   }
   
   for(j in 1:nsim.blocks){
@@ -28,9 +28,10 @@ sim.snp.sumstat<-function(model,nsim.blocks,path=getwd(),append.sims=F,block.siz
     sumstat<-colMeans(sumstat,na.rm = T)
     param<-rbind(param,com[[3]][2,])
     SS<-rbind(SS,sumstat)
-    print(paste(j,i))}
+    print(paste(j,i))
+    }
   
-  }
-  write.table(SS,file="sumstat.txt",quote=F,row.names = F,col.names = F, append=T)
+  write.table(SS,file="sumstat.txt",quote=F,row.names = F,col.names = F, append=T,sep="\t")
   write.table(param,file="parameters.txt",quote=F,row.names = F,col.names = F, append=T,sep="\t")
   }
+}
