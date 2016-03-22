@@ -36,7 +36,7 @@ switch.mig.menu<-function(){
          sys.call(which=-1)
          mig.menu()},
               
-          A = {xrow<-readline("Which parameter do you want to set up? (write the reference number from the menu): ")
+          A = {xrow<-as.numeric(readline("Which parameter do you want to set up? (write the reference number from the menu): "))
               if(.e$m[1,6]=="normal"){
                 .e$em$size[xrow,4]<-readline(paste("migration prior (4Nm)",.e$em$size[xrow,1],"mean: "))
                 .e$em$size[xrow,5]<-readline(paste("migration prior (4Nm)",.e$em$size[xrow,1],"Standard Deviation: "))

@@ -41,12 +41,12 @@ switch.demog.menu<-function(){
            },
            
            
-         "4" = {xrow<-readline("Which parameter do you want to set up? (write the reference number from the menu): ")
-         if(.e$n[1,6]=="normal"){
+         "4" = {xrow<-as.numeric(readline("Which parameter do you want to set up? (write the reference number from the menu): "))
+         if(.e$en$size[1,6]=="normal"){
            .e$en$size[xrow,4]<-readline(paste("Ancestral Ne prior (4Nm)",.e$en$size[xrow,1],"mean: "))
            .e$en$size[xrow,5]<-readline(paste("Ancestral Ne prior (4Nm)",.e$en$size[xrow,1],"Standard Deviation: "))
          }
-         if(.e$n[1,6]=="uniform"){
+         if(.e$en$size[1,6]=="uniform"){
            .e$en$size[xrow,4]<-readline(paste("Ancestral Ne prior (4Nm)",.e$en$size[xrow,1],"min: "))
            .e$en$size[xrow,5]<-readline(paste("Ancestral Ne prior (4Nm)",.e$en$size[xrow,1],"max: "))
          }
