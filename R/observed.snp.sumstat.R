@@ -1,5 +1,5 @@
 
-observed.snp.sumstat<-function(path.to.fasta,pop.assign){
+observed.snp.sumstat<-function(path.to.fasta,pop.assign,msABC.call){
   setwd(path.to.fasta)
   fasta.files<-list.files()
   fasta.files<-fasta.files[grep(".fas",fasta.files,fixed=T)]
@@ -10,7 +10,7 @@ observed.snp.sumstat<-function(path.to.fasta,pop.assign){
   xx<-strsplit(ms.output[[1]][1]," ")
   xx<-xx[[1]][2:length(xx[[1]])]
   xx<-paste(xx, collapse=" ")
-  system(paste("./msABC ",xx," --obs ",locus.name,".ms > ",locus.name,".out",sep=""))
+  system(paste(msABC.call,xx," --obs ",locus.name,".ms > ",locus.name,".out",sep=""))
   ss<-read.table(file=paste(locus.name,".out",sep=""),header=T)
   observed<-rbind(observed,ss)
   print(i)
