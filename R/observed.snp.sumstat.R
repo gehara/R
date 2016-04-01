@@ -10,11 +10,7 @@ observed.snp.sumstat<-function(path.to.fasta,pop.assign,msABC.call){
   xx<-strsplit(ms.output[[1]][1]," ")
   xx<-xx[[1]][2:length(xx[[1]])]
   xx<-paste(xx, collapse=" ")
-<<<<<<< HEAD
   system(paste(msABC.call," ",xx," --obs ",locus.name,".ms > ",locus.name,".out",sep=""))
-=======
-  system(paste(msABC.call,xx," --obs ",locus.name,".ms > ",locus.name,".out",sep=""))
->>>>>>> 92f47197fd0fe750ed2d3c559768f259e37e1946
   ss<-read.table(file=paste(locus.name,".out",sep=""),header=T)
   observed<-rbind(observed,ss)
   print(i)
