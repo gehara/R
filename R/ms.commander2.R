@@ -2,18 +2,18 @@
 ms.commander2<-function(model){
   
   # bing Ne, mig and Time priors
-  size.pars.1<-rbind(model$flags$n,model$flags$en$size)
-  mig.pars.1<-rbind(model$flags$m,model$flags$em$size)
-  time.pars.1<-rbind(model$flags$ej,model$flags$en$time,model$flags$em$time)
+  size.pars<-rbind(model$flags$n,model$flags$en$size)
+  mig.pars<-rbind(model$flags$m,model$flags$em$size)
+  time.pars<-rbind(model$flags$ej,model$flags$en$time,model$flags$em$time)
   # sample Ne, div.time and mutation rate
-  size.pars.1<-sample.w.cond(par.matrix=size.pars.1,cond.matrix=model$conds$size.matrix)
-  time.pars.1<-sample.w.cond(par.matrix=time.pars.1,cond.matrix=model$conds$time.matrix)
+  size.pars<-sample.w.cond(par.matrix=size.pars,cond.matrix=model$conds$size.matrix)
+  time.pars<-sample.w.cond(par.matrix=time.pars,cond.matrix=model$conds$time.matrix)
   loci<-sample.pars(model$loci)
   # empty parameter vector
   parameters<-vector()
   # bind Ne and time sampled parameters
-  parameters<-rbind(parameters,size.pars.1[,c(1,4)])
-  parameters<-rbind(parameters,time.pars.1[,c(1,4)])
+  parameters<-rbind(parameters,size.pars[,c(1,4)])
+  parameters<-rbind(parameters,time.pars[,c(1,4)])
   # generate coalescent scalar. Arbitrary value 
   if(model$flags$n[1,6]=="runif") {Ne0<-min(as.numeric(model$flags$n[,4]))
   } else {Ne0<-mean(as.numeric(model$flags$n[,4]))}
@@ -21,8 +21,8 @@ ms.commander2<-function(model){
   commands<-list(NULL)
   for(u in 1:nrow(loci)){
   # transform parameters to fit the scalar
-  size.pars[,4:5]<-as.numeric(size.pars.1[,4])/ms.scalar*as.numeric(loci[u,3])
-  time.pars[,4:5]<-as.numeric(time.pars.1[,4])/ms.scalar
+  size.pars[,4:5]<-as.numeric(size.pars[,4])/ms.scalar*as.numeric(loci[u,3])
+  time.pars[,4:5]<-as.numeric(time.pars[,4])/ms.scalar
   # empty string, ms flags
   string<-list()
   #

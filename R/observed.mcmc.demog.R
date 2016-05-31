@@ -1,4 +1,4 @@
-observed.coexp.sumstat<-function(path.to.fasta){
+observed.mcmc.demog<-function(path.to.fasta){
   setwd(path.to.fasta)
   fasta.files<-list.files()
   fasta.files<-fasta.files[grep(".fas",fasta.files)]
@@ -24,26 +24,6 @@ observed.coexp.sumstat<-function(path.to.fasta){
     sum.stat<-rbind(sum.stat,SS)
     }
     
-vari<-diag(var(sum.stat))
-means<-colMeans(sum.stat,na.rm=T)
-skew<-NULL
-kur<-NULL
-for(u in 1:4){
-  s<-skewness(sum.stat[,u])
-  skew<-c(skew,s)
-  k<-kurtosis(sum.stat[,u])
-  kur<-c(kur,k)
-}
-
-h.s<-c(vari[1],means[1],skew[1],kur[1],
-       vari[2],means[2],skew[2],kur[2],
-       vari[3],means[3],skew[3],kur[3],
-       vari[4],means[4],skew[4],kur[4])
-
-names(h.s)<-c("var.pi","mean.pi","skew.pi","kur.pi",
-              "var.ss","mean.ss","skew.ss","kur.ss",
-              "var.H","mean.H","skew.H","kur.H",
-              "var.TD","mean.TD","skew.TD","kur.TD")
 #write.table(t(h.s),file="h.sum.stat.txt",col.names = F, row.names=F, append=T,sep="\t")  
-return(h.s)
+return(sum.stat)
 }

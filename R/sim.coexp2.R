@@ -1,4 +1,4 @@
-sim.coexp<-function(nsims,
+sim.coexp2<-function(nsims,
                     var.zeta,
                     coexp.prior,
                     buffer,
@@ -36,7 +36,7 @@ sim.coexp<-function(nsims,
   
   TIME<-system.time(for (i in 1:nsims){
     
-    x<-coexp.sample.pars(nruns=1,var.zeta=var.zeta,coexp.prior=coexp.prior,buffer=buffer,Ne.prior=Ne.prior,
+    x<-coexp.sample.pars2(nruns=1,var.zeta=var.zeta,coexp.prior=coexp.prior,buffer=buffer,Ne.prior=Ne.prior,
                          NeA.prior=NeA.prior,time.prior=time.prior,gene.prior=gene.prior)
     
     y<-coexp.MS(MS.par=x$MS.par, gene.prior = gene.prior,alpha=alpha)

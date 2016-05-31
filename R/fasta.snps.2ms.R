@@ -32,12 +32,14 @@ fasta.snp.2ms<-function(path.to.fasta,fasta.files,write.file=T,pop.assign){
       c<-length(grep("c",fas[,i]))
       g<-length(grep("g",fas[,i]))
       t<-length(grep("t",fas[,i]))
+      
       r<-length(grep("r",fas[,i]))
       y<-length(grep("y",fas[,i]))
       m<-length(grep("m",fas[,i]))
       k<-length(grep("k",fas[,i]))
       s<-length(grep("s",fas[,i]))
       w<-length(grep("w",fas[,i]))
+      
       h<-length(grep("h",fas[,i]))
       b<-length(grep("b",fas[,i]))
       v<-length(grep("v",fas[,i]))
@@ -54,21 +56,24 @@ fasta.snp.2ms<-function(path.to.fasta,fasta.files,write.file=T,pop.assign){
     pos<-pos/ncol(fas)
     if(!(is.null(bin))){
     for(j in 1:ncol(bin)){
-      a<-length(grep("a",bin[,j]))/nrow(bin)
-      c<-length(grep("c",bin[,j]))/nrow(bin)
       g<-length(grep("g",bin[,j]))/nrow(bin)
+      a<-length(grep("a",bin[,j]))/nrow(bin)
       t<-length(grep("t",bin[,j]))/nrow(bin)
+      c<-length(grep("c",bin[,j]))/nrow(bin)
+     
       r<-length(grep("r",bin[,j]))/nrow(bin)
       y<-length(grep("y",bin[,j]))/nrow(bin)
       m<-length(grep("m",bin[,j]))/nrow(bin)
       k<-length(grep("k",bin[,j]))/nrow(bin)
+      s<-length(grep("s",bin[,j]))/nrow(bin)
       w<-length(grep("w",bin[,j]))/nrow(bin)
+      
       h<-length(grep("h",bin[,j]))/nrow(bin)
       b<-length(grep("b",bin[,j]))/nrow(bin)
       v<-length(grep("v",bin[,j]))/nrow(bin)
       d<-length(grep("d",bin[,j]))/nrow(bin)
-      bases<-c(a,c,g,t,r,y,m,k,w,h,b,v,d)
-      names(bases)<-c("a","c","g","t","r","y","m","k","w","h","b","v","d")
+      bases<-c(a,c,g,t,r,y,m,s,k,w,h,b,v,d)
+      names(bases)<-c("a","c","g","t","r","y","m","s","k","w","h","b","v","d")
       base<-which.max(bases[1:4])
       bin[,j]<-gsub(names(base),0,bin[,j])
       bases<-bases[-base]
