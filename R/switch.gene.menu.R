@@ -13,11 +13,11 @@ switch.gene.menu<-function(){
          gene.menu()},
          
          P = {xrow<-as.numeric(readline("Which parameter do you want to set up? (write the reference number from the menu): "))
-              if(.e$m[1,6]=="normal"){
+              if(.e$loci[1,6]=="normal"){
               .e$loci[xrow,4]<-readline(paste("per base pair mutation prior",.e$I[xrow,1],"mean: "))
               .e$loci[xrow,5]<-readline(paste("per base pair mutation prior",.e$I[xrow,1],"Standard Deviation: "))
               }
-              if(.e$m[1,6]=="uniform"){
+              if(.e$loci[1,6]=="uniform"){
               .e$loci[xrow,4]<-readline(paste("per base pair mutation prior",.e$I[xrow,1],"min: "))
               .e$loci[xrow,5]<-readline(paste("per base pair mutation prior",.e$I[xrow,1],"max: "))
               }

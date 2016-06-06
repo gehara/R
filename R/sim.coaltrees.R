@@ -1,4 +1,4 @@
-sim.coaltrees<-function(model,nsim.blocks,path=getwd(),append.sims=F,sim.block.size=1000){
+sim.coaltrees<-function(model,nsim.blocks,use.alpha=F,path=getwd(),append.sims=F,sim.block.size=1000){
   
   setwd(path)
   thou<-0
@@ -12,7 +12,7 @@ sim.coaltrees<-function(model,nsim.blocks,path=getwd(),append.sims=F,sim.block.s
     
     for(k in 1:sim.block.size){
       for(u in 1:nrow(model$I)){
-        t<-ms(nreps=1,nsam=sum(as.numeric(model$I[u,4:ncol(model$I)])),opts=paste("-T",ms.commander(model)[[u]]))
+        t<-ms(nreps=1,nsam=sum(as.numeric(model$I[u,4:ncol(model$I)])),opts=paste("-T",ms.commander2(model,use.alpha=use.alpha)[[u]]))
         sims[[u]]<-c(sims[[u]],t[3])
         }
       print(k+thou)

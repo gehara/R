@@ -20,7 +20,11 @@ for (j in 1:length(ms.output)){
   H<-H.div(x)
   TD<-tajima.test(x)$D
   
-  SS<-c(pi,ss,H[2],TD)
+  sspec<-site.spectrum(x,folded=T)
+  sspec<-sspec/sum(na.omit(sspec))
+  sspec<-sspec[1:3]
+  
+  SS<-c(pi,ss,H[2],TD,sspec)
   sum.stat<-rbind(sum.stat,SS)
 }
 #SDs<-apply(sum.stat,2,sd)
@@ -28,12 +32,20 @@ vari<-diag(var(sum.stat))
 means<-colMeans(sum.stat)
 skew<-NULL
 kur<-NULL
-for(u in 1:4){
+for(u in 1:ncol(sum.stat)){
   s<-skewness(sum.stat[,u])
   skew<-c(skew,s)
   k<-kurtosis(sum.stat[,u])
   kur<-c(kur,k)
 }
-h.s<-c(vari[1],means[1],skew[1],kur[1],vari[2],means[2],skew[2],kur[2],vari[3],means[3],skew[3],kur[3],vari[4],means[4],skew[4],kur[4])
+
+h.s<-c(vari[1],means[1],skew[1],kur[1],
+       vari[2],means[2],skew[2],kur[2],
+       vari[3],means[3],skew[3],kur[3],
+       vari[4],means[4],skew[4],kur[4],
+       vari[5],means[5],skew[5],kur[5],
+       vari[6],means[6],skew[6],kur[6],
+       vari[7],means[7],skew[7],kur[7])
+
 return(h.s)
 }

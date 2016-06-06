@@ -6,7 +6,7 @@ anc.mig.par<-function(){
   for(i in 1:nrow(.e$n)){
     for(j in 1:nrow(.e$n)){
       if(i==j){
-       }else{ x<-readline(paste("How many changes in migration for mig",i,"_",j,": ",sep=""))
+       }else{x<-readline(paste("How many changes in migration for mig",i,"_",j,": ",sep=""))
         if(x==0){
           }else{
            for(l in 1:x){
@@ -36,8 +36,8 @@ anc.mig.par<-function(){
   .e$em$time[,1]<-t.mig.par
   .e$em$time[,2]<-"-em"
   .e$em$time[,3]<-pops
-  .e$em$time[,4]<-20000
-  .e$em$time[,5]<-10000
+  .e$em$time[,4]<-10000
+  .e$em$time[,5]<-20000
   .e$em$time[,6]<-'uniform'
   
 }

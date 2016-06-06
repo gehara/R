@@ -1,5 +1,5 @@
 
-sim.sumstat<-function(model,nsim.blocks,perpop.SS=T,overall.SS=T,path=getwd(),append.sims=F,sim.block.size=1000){
+sim.sumstat<-function(model,use.alpha=F,nsim.blocks,perpop.SS=T,overall.SS=T,path=getwd(),append.sims=F,sim.block.size=1000){
   
   # get population structure
   pops<-get.pops(model)
@@ -19,7 +19,7 @@ sim.sumstat<-function(model,nsim.blocks,perpop.SS=T,overall.SS=T,path=getwd(),ap
     if(overall.SS==T){
     write.table(t(overall.NAMES),file="GlobalSumStat.txt",quote=F,row.names=F, col.names = F,sep="\t",append=F)
     }
-  write.table(t(ms.commander2(model)[[nrow(model$loci)+1]][1,]),file="SampPars.txt",quote=F,row.names=F, col.names = F,sep="\t",append=F)
+  write.table(t(ms.commander2(model,use.alpha = use.alpha)[[nrow(model$loci)+1]][1,]),file="SampPars.txt",quote=F,row.names=F, col.names = F,sep="\t",append=F)
   }
   # beggin simulations
   thou<-0
@@ -32,7 +32,7 @@ sim.sumstat<-function(model,nsim.blocks,perpop.SS=T,overall.SS=T,path=getwd(),ap
     sims[[nrow(model$loci)+1]]<-vector()
     # ms simulation
     for(k in 1:sim.block.size){
-      com<-ms.commander2(model)
+      com<-ms.commander2(model,use.alpha=use.alpha)
       for(u in 1:nrow(model$I)){
         S<-ms(nreps=1,nsam=sum(as.numeric(model$I[u,4:ncol(model$I)])),opts=com[[u]])
         sims[[u]]<-c(sims[[u]],S[2:length(S)])

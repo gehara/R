@@ -15,12 +15,15 @@ sim.coexp2<-function(nsims,
   
   
   if(append.sims==F){
-    simulations<-matrix(nrow=1,ncol=20)
+    simulations<-matrix(nrow=1,ncol=32)
     simulations[1,]<-c("zeta","ts","E(t)","DI",
                "var.pi","mean.pi","skew.pi","kur.pi",
                "var.ss","mean.ss","skew.ss","kur.ss",
                "var.H","mean.H","skew.H","kur.H",
-               "var.TD","mean.TD","skew.TD","kur.TD")
+               "var.TD","mean.TD","skew.TD","kur.TD",
+               "var.sfs1","mean.sfs1","skew.sfs1","kur.sfs1",
+               "var.sfs2","mean.sfs2","skew.sfs2","kur.sfs2",
+               "var.sfs3","mean.sfs3","skew.sfs3","kur.sfs3")
     
     write.table(simulations,file="simulations.txt", quote=F,row.names=F, col.names=F, sep="\t")
     
@@ -36,7 +39,7 @@ sim.coexp2<-function(nsims,
   
   TIME<-system.time(for (i in 1:nsims){
     
-    x<-coexp.sample.pars2(nruns=1,var.zeta=var.zeta,coexp.prior=coexp.prior,buffer=buffer,Ne.prior=Ne.prior,
+    x<-coexp.sample.pars2(nruns=1,var.zeta=var.zeta,coexp.prior=coexp.prior,Ne.prior=Ne.prior,
                          NeA.prior=NeA.prior,time.prior=time.prior,gene.prior=gene.prior)
     
     y<-coexp.MS(MS.par=x$MS.par, gene.prior = gene.prior,alpha=alpha)
