@@ -25,6 +25,7 @@ sample.w.cond<-function(par.matrix,cond.matrix){
     }
     
   z<-which(cond.matrix=="=", arr.ind=T)
+  z<-z[order(z[,1]),]
   if(nrow(z)!=0){
     for(i in 1:nrow(z)){
       equal<-NULL
@@ -32,7 +33,6 @@ sample.w.cond<-function(par.matrix,cond.matrix){
         eq<-which(par.matrix==nam[z[i,j]])
         equal<-c(equal,eq)
       }
-      equal<-sample(equal,length(equal))
       x[equal[1],4:5]<-x[equal[2],4:5]
     }
   }

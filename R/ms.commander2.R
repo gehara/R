@@ -69,7 +69,7 @@ ms.commander2<-function(model,use.alpha=use.alpha){
       
       # generate Ne string
       if(nrow(curr.Ne)==1){
-        string[[1]]<-paste(curr.Ne,collapse = " ")
+        string[[1]]<-paste(curr.Ne[2:4],collapse = " ")
       } else {
       l<-apply(curr.Ne[,c(2:4)],1,paste,collapse=" ")
       string[[1]]<-paste(l,collapse = " ")
@@ -92,7 +92,7 @@ ms.commander2<-function(model,use.alpha=use.alpha){
         if(nrow(en)>1){
         n<-apply(cbind(ent[,c(2,4)],en[,3:4]),1,paste,collapse=" ")
         string[[3]]<-paste(n, collapse=" ")
-        } else {string[[3]]<-paste(en, collapse=" ")}
+        } else {string[[3]]<-paste(ent[c(2,4)],en[3:4], collapse=" ")}
       }  
       
       ######### migration parameters #########################
@@ -156,7 +156,7 @@ ms.commander2<-function(model,use.alpha=use.alpha){
         
       ej<-subset(time.pars, time.pars[,2]=="-ej")
       if(nrow(ej)==1){
-        string[[6]]<-paste(ej, collapse=" ")
+        string[[6]]<-paste(ej[c(2,4,3)], collapse=" ")
       }else{
         j<-apply(ej[,c(2,4,3)],1,paste,collapse=" ")
         string[[6]]<-paste(j, collapse=" ")}
@@ -174,4 +174,3 @@ ms.commander2<-function(model,use.alpha=use.alpha){
   commands[[nrow(loci)+1]]<-t(parameters)
   return(commands)
   }
-use.alpha=F
