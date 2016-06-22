@@ -1,23 +1,23 @@
 observed.sumstat<-function(model,path.to.fasta,fasta.files=list.files(),overall.SS=T,perpop.SS=T){
-  
+
   # get population structure
   pops<-get.pops(model)
   # get sumstats names
   NAMES<-get.ss.pop.name(pops[[1]])
   # overall SS names
   overall.NAMES<-c("s.sites","pi","Hap.div","Taj.D","Fu.Li.D","Fu.Li.F")
-  
-  sewd(path.to.fasta)
+
+  setwd(path.to.fasta)
   if(perpop.SS==T){
     write.table(t(NAMES),file="ObservedSS.txt",quote=F,row.names=F, col.names = F,sep="\t",append=F)
     }
   if(overall.SS==T){
     write.table(t(overall.NAMES),file="ObservedoverallSS.txt",quote=F,row.names=F, col.names = F,sep="\t",append=F)
     }
-  
-  
+
+
   fasta2ms(path.to.fasta,fasta.files,write.file=T)
-  
+
   ss<-list(NULL)
   OA.ss<-list(NULL)
   for(u in 1:length(fasta.files)){
