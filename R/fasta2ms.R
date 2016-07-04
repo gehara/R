@@ -1,5 +1,5 @@
 fasta2ms<-function(path.to.fasta,fasta.files,write.file=T){
-  
+
   setwd(path.to.fasta)
   ms.out<-list()
   for(u in 1:length(fasta.files)){
@@ -38,7 +38,7 @@ fasta2ms<-function(path.to.fasta,fasta.files,write.file=T){
     for(i in 1:nrow(bin)){
       seqs<-c(seqs,paste(bin[i,],collapse=""))
     }
-    
+
     if(write.file==T){
       write(file=paste(fasta.files[u],".ms",sep=""),paste("ms",nrow(fas),1))
       write(file=paste(fasta.files[u],".ms",sep=""),"//",append=T)
@@ -46,7 +46,7 @@ fasta2ms<-function(path.to.fasta,fasta.files,write.file=T){
       write(file=paste(fasta.files[u],".ms",sep=""),paste("positions:   ",paste(pos,collapse="    ")),append=T)
       write(file=paste(fasta.files[u],".ms",sep=""),seqs,sep="\n",append=T)
     }
-    
+
     if(write.file==F){
       ms.out[[u]]<-paste("ms",nrow(fas),1)
       ms.out[[u]]<-c(ms.out[[u]],paste("//"))
