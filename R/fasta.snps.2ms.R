@@ -22,9 +22,9 @@ fasta.snp.2ms<-function(path.to.fasta,fasta.files,write.file=T,pop.assign){
     for(i in 1:npops){
       pop.list[[i]]<-length(grep(i,pops[,2]))
     }
-    
+   
     string<-paste("-I",npops,paste(unlist(pop.list),collapse=" "))
-    
+   
     bin<-NULL
     pos<-NULL
     for(i in 1:ncol(fas)){
@@ -96,8 +96,9 @@ fasta.snp.2ms<-function(path.to.fasta,fasta.files,write.file=T,pop.assign){
       write(file=paste(strsplit(fasta.files[u],".",fixed=T)[[1]][1],".ms",sep=""),paste("positions:   ",paste(pos,collapse="    ")),append=T)
       write(file=paste(strsplit(fasta.files[u],".",fixed=T)[[1]][1],".ms",sep=""),seqs,sep="\n",append=T)
     }
-    
+      if(npops>1){
       ms.out[[u]]<-paste("ms",nrow(fas),1,string)
+      } else { ms.out[[u]]<-paste("ms",nrow(fas),1)}
       ms.out[[u]]<-c(ms.out[[u]],paste("//"))
       ms.out[[u]]<-c(ms.out[[u]],paste("segsites:",ss))
       ms.out[[u]]<-c(ms.out[[u]],paste("positions:   ",paste(pos,collapse="    ")))

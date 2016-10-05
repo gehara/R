@@ -1,6 +1,6 @@
 
 sim.sumstat<-function(model,use.alpha=F,nsim.blocks,perpop.SS=T,overall.SS=T,path=getwd(),append.sims=F,sim.block.size=1000){
-  
+
   # get population structure
   pops<-get.pops(model)
   # get sumstats names
@@ -8,7 +8,7 @@ sim.sumstat<-function(model,use.alpha=F,nsim.blocks,perpop.SS=T,overall.SS=T,pat
   # overall SS names
   overall.NAMES<-c("s.sites","pi","Hap.div","Taj.D","Fu.Li.D","Fu.Li.F")
   # get temp dir to save ms output
-  swap<-tempdir()
+  swap<-path
   # set working directory
   setwd(path)
   # write output headings
@@ -25,7 +25,7 @@ sim.sumstat<-function(model,use.alpha=F,nsim.blocks,perpop.SS=T,overall.SS=T,pat
   thou<-0
   for(j in 1:nsim.blocks){
     # generate ms output vector
-    sims<-list(NULL)  
+    sims<-list(NULL)
     for(i in 1:nrow(model$I)){
       sims[[i]]<-paste("ms",sum(as.numeric(model$I[i,4:ncol(model$I)])),sim.block.size)
     }
@@ -41,13 +41,15 @@ sim.sumstat<-function(model,use.alpha=F,nsim.blocks,perpop.SS=T,overall.SS=T,pat
       sims[[nrow(model$loci)+1]]<-rbind(sims[[nrow(model$loci)+1]],com[[nrow(model$loci)+1]][2,])
       print(k+thou)
     }
+
     # write ms output to file
     for(u in 1:nrow(model$I)){
     write(sims[[u]],file=paste(swap,"/locus",u,sep=""), append=F)
     }
+   
     # Start Summary stats calulation
     print("PopGenome!")
-  
+
     ss<-list(NULL)
     OA.ss<-list(NULL)
     for(u in 1:nrow(model$I)){
@@ -73,7 +75,7 @@ sim.sumstat<-function(model,use.alpha=F,nsim.blocks,perpop.SS=T,overall.SS=T,pat
       print(paste("calculating per pop sumary statistics - locus",u))
       ss[[u]]<-neutrality.stats(ss[[u]],FAST=T)
       ss[[u]]<-F_ST.stats(ss[[u]],FAST=T)
-      
+
       s.sites<-ss[[u]]@n.segregating.sites
       pi.within<-ss[[u]]@nuc.diversity.within/as.numeric(model$loci[u,2])
       Hap.div<-ss[[u]]@hap.diversity.within
@@ -87,12 +89,14 @@ sim.sumstat<-function(model,use.alpha=F,nsim.blocks,perpop.SS=T,overall.SS=T,pat
       nuc.Fst<-ss[[u]]@nucleotide.F_ST
       ss[[u]]<-cbind(s.sites,pi.within,Hap.div,Taj.D,Fu.Li.D,Fu.Li.F,Hap.Fst,nuc.Fst)
       }
-     }
+      
+      }
     # mean sumstats
     if(perpop.SS==T){
     ss<-Reduce("+",ss)/nrow(model$I)
     # write outputs
     write.table(ss,file="SumStat.txt",quote=F,row.names=F, col.names = F, append=T,sep="\t")
+    
     }
     if(overall.SS==T){
     OA.ss<-Reduce("+",OA.ss)/nrow(model$I)
@@ -101,8 +105,12 @@ sim.sumstat<-function(model,use.alpha=F,nsim.blocks,perpop.SS=T,overall.SS=T,pat
     write.table(sims[[nrow(model$loci)+1]],file="SampPars.txt",quote=F,row.names=F, col.names = F,sep="\t",append=T)
     # report job
     print(paste(j,"000 sims done!"))
+    list = ls()
+    x<-grep("thou",list)
+    list<-list[-x]
+    rm(list)
     thou<-thou+sim.block.size
   }
 }
-   
+
 

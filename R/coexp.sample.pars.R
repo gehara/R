@@ -66,10 +66,10 @@ coexp.sample.pars<-function(nruns,
       while(mi<0){
         mi <- do.call(as.character(gene.prior[i,2]),args=list(1,gene.prior[i,3],gene.prior[i,4]),quote=F)
       }
-      Ne <- Ne*gene.prior[i,7]
-      theta=4*Ne*mi*gene.prior[i,5]
-      scalar=4*Ne
-      EXP.time=Ne.EXP.t/scalar
+      Ne <- Ne*gene.prior[i,7] # Ne times inheritance scalar: cerrects the Ne
+      theta=4*Ne*mi*gene.prior[i,5] # 4N x mutation per pb x bp
+      scalar=4*Ne # generates the coalescent scalar
+      EXP.time=Ne.EXP.t/scalar # expansion time / 4N 
       
       g.rate=-log(NeA/Ne)/Ne.EXP.t
       

@@ -1,5 +1,5 @@
 
-ms.commander2<-function(model,use.alpha=use.alpha){
+msABC.commander<-function(model,use.alpha=use.alpha){
   
   # bind Ne, mig and Time priors
   size.pars<-rbind(model$flags$n,model$flags$en$size)
@@ -169,7 +169,7 @@ ms.commander2<-function(model,use.alpha=use.alpha){
       #################################### theta and structure ###########################
       ######### generate -t and -I part of the command
       
-      y<-paste("-t",loci[u,7],paste(model$I[u,2:ncol(model$I)],collapse=" "),collapse=" ")
+      y<-paste(sum(as.numeric(model$I[u,4:ncol(model$I)])),"1 -t",loci[u,7],paste(model$I[u,2:ncol(model$I)],collapse=" "),collapse=" ")
       commands[[u]]<-paste(y,string, collapse=" ")
       }
   #### attach sampled parameters
