@@ -19,13 +19,14 @@ coexp.sample.pars2<-function(nruns,
       Ne <- runif(1, Ne.prior[1,3], Ne.prior[1,4])
       e.t<-runif(1, time.prior[1,3], time.prior[1,4])
       Ne.EXP.t <- e.t/time.prior[1,5] #corrects by generations
-      theta.A.ratio <- runif(1, NeA.prior[1,3], NeA.prior[1,4])# thetaA (NeA) ratio
+      theta.A.ratio <- runif(1, NeA.prior[1], NeA.prior[2])# thetaA (NeA) ratio
       NeA <- Ne*theta.A.ratio
       mi <- do.call(as.character(gene.prior[1,2]),args=list(1,gene.prior[1,3],gene.prior[1,4]),quote=F)
       while(mi<0){
         mi <- do.call(as.character(gene.prior[1,2]),args=list(1,gene.prior[1,3],gene.prior[1,4]),quote=F)
       }
       po.par<-c(Ne,e.t,NeA,mi)
+
       Ne <- Ne*gene.prior[1,7]
       theta=4*Ne*mi*gene.prior[1,5]
       scalar=4*Ne

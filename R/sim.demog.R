@@ -15,17 +15,9 @@ sim.demog<-function(nsims,
 
   if(append.sims==F){
     simulations<-matrix(nrow=1,ncol=8)
-    simulations[1,]<-c("zeta","ts","E(t)","DI",
-               "pi","ss","H","TD")
-
+    simulations[1,]<-c("zeta","ts","E(t)","DI","pi","ss","H","TD")
     write.table(simulations,file="demog_sim.txt", quote=F,row.names=F, col.names=F, sep="\t")
-
-    populations.par<-matrix(nrow=1,ncol=nrow(NeA.prior)*4)
-    pop.names<-NULL
-    for(i in 1:nrow(NeA.prior)){
-    pop.names<-cbind(pop.names,t(c(paste("Ne",i,sep=""),paste("Exp.time",i,sep=""),paste("NeA",i,sep=""),paste("mi",i,sep=""))))
-    }
-    populations.par[1,]<-pop.names
+    populations.par<-matrix(c("Ne","Exp.time","NeA","mi"),nrow=1,ncol=4)
     write.table(populations.par,file="pop_parameters.txt", quote=F,row.names=F, col.names=F, sep="\t")
   }
 
