@@ -1,11 +1,10 @@
 sim.demog<-function(nsims,
                     coexp.prior,
-                    buffer,
                     Ne.prior,
                     NeA.prior,
                     time.prior,
                     gene.prior,
-                    alpha=F,
+                    alpha=alpha,
                     append.sims=F,
                     path=getwd())
 {
