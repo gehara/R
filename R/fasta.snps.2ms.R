@@ -9,7 +9,7 @@ fasta.snp.2ms<-function(path.to.fasta,fasta.files,write.file=T,pop.assign){
     fasta<-NULL
     p<-NULL
     for(j in 1:nrow(pops)){
-      x<-grep(pops[j,1],rownames(fas),fixed=T)
+      x<-match(pops[j,1],rownames(fas))
     if(length(x)>0){
       p<-rbind(p,pops[j,])
       fasta<-rbind(fasta,fas[x,])

@@ -1,9 +1,9 @@
-observed.demog.sumstat<-function(path.to.fasta){
-  
+observed.demog.sumstat<-function(path.to.fasta,fasta.files){
+
   setwd(path.to.fasta)
-  fasta.files<-list.files()
-  fasta.files<-fasta.files[grep(".fas",fasta.files)]
-  
+  #fasta.files<-list.files()
+  #fasta.files<-fasta.files[grep(".fas",fasta.files)]
+
   ms.output<-fasta2ms(path.to.fasta,fasta.files,write.file=F)
   bp.length<-list()
   ss<-list()
@@ -12,7 +12,7 @@ observed.demog.sumstat<-function(path.to.fasta){
     bp.length[[i]]<-ncol(fas)
     ss[[i]]<-as.numeric(strsplit(ms.output[[i]][3]," ")[[1]][2])
   }
-  
+
   sum.stat<-NULL
   for (j in 1:length(ms.output)){
     x<-ms.to.DNAbin(ms.output = ms.output[[j]],bp.length = bp.length[[j]])
@@ -20,10 +20,10 @@ observed.demog.sumstat<-function(path.to.fasta){
     pi<-nuc.div(x)
     H<-H.div(x)[2]
     TD<-tajima.test(x)$D
-    
+
     SS<-c(pi[[1]],ss[[j]],H,TD[1])
     sum.stat<-rbind(sum.stat,SS)
     }
-    
-return(sumstat)
+
+return(sum.stat)
 }
