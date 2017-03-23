@@ -1,4 +1,4 @@
-coexp.sample.pars2<-function(nruns,
+demog.sample.pars<-function(nruns,
                             var.zeta,
                             coexp.prior,
                             buffer,
