@@ -27,16 +27,27 @@ test.demog<-function(nsims,
       parameters<-rbind(parameters,pars)
       index<-c(index,rep(rownames(mod)[j],nrow(result)))
     }
-    prob<-postpr(observed[i,],index,models[,5:8],method=method, tol=tol)
+    prob<-postpr(observed[i,],index,models[,5:8],method="rejection", tol=tol)
     prob<-summary(prob)
+    tabela<-rbind(tabela,prob$Prob)
+    #if(sort(prob$Prob)[1]==0){
+    #  tabela<-rbind(tabela,prob$Prob)
+    #} else {
+    #  prob<-postpr(observed[i,],index,models[,5:8],method="neuralnet", tol=tol)
+    #  prob<-summary(prob)
+    #  tabela<-rbind(tabela,prob$neuralnet$Prob)
+    #  print("RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRROLOU!!!!!")
+    #}
 
+    cv<-cv4postpr(index,models[,5:8],nval=100,tols=tol,method="rejection")
+    pdf(paste("CV_",rownames(observed)[i],".pdf",sep=""), paper="a4r", width=10, pointsize=10)
+    plot(cv)
+    graphics.off()
 
     data<-c(index,"observed")
     x<-rbind(models[,5:8],observed[i,])
     PCA<-prcomp(x, center = T, scale. = T, retx=T)
     scores <- data.frame(PCA$x[,1:2])
-
-
 
     PCA.plot<-ggplot(scores, aes(x=PC1, y=PC2))+
       theme(legend.text = element_text(size = 30, face = "bold"))+
@@ -45,10 +56,8 @@ test.demog<-function(nsims,
       scale_colour_brewer(palette="Spectral")
     pdf(paste("PCA12",rownames(observed)[i],".pdf",sep=""), paper="a4r", width=10, pointsize=10)
     plot(PCA.plot)
-    dev.off()
+    graphics.off()
 
-
-    tabela<-rbind(tabela,prob$neuralnet$Prob)
   }
   rownames(tabela)<-rownames(observed)
 
