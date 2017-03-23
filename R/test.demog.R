@@ -5,6 +5,7 @@ test.demog<-function(nsims,
                      observed,
                      alpha=F,
                      tol=0.01,
+                     method="rejection",
                      path=path){
   tabela<-NULL
   theme_set(theme_grey(base_size = 30))
@@ -14,7 +15,7 @@ test.demog<-function(nsims,
     parameters<-NULL
     models<-NULL
     index<-NULL
-    mod<-cbind(c(1,0.001,1),c(1,1,10))
+    mod<-cbind(c(1,0.001,2),c(1,0.1,10))
     rownames(mod)<-c("CS","Exp","BOTT")
 
     for(j in 1:nrow(mod)){
@@ -26,7 +27,7 @@ test.demog<-function(nsims,
       parameters<-rbind(parameters,pars)
       index<-c(index,rep(rownames(mod)[j],nrow(result)))
     }
-    prob<-postpr(observed[i,],index,models[,5:8],method="rejection", tol=tol)
+    prob<-postpr(observed[i,],index,models[,5:8],method=method, tol=tol)
     prob<-summary(prob)
 
 
@@ -47,7 +48,7 @@ test.demog<-function(nsims,
     dev.off()
 
 
-    tabela<-rbind(tabela,prob$Prob)
+    tabela<-rbind(tabela,prob$neuralnet$Prob)
   }
   rownames(tabela)<-rownames(observed)
 
