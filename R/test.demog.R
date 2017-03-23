@@ -35,13 +35,15 @@ test.demog<-function(nsims,
     PCA<-prcomp(x, center = T, scale. = T, retx=T)
     scores <- data.frame(PCA$x[,1:2])
 
-    #pdf(paste("PCA12",rownames(observed)[i],".pdf",sep=""), paper="a4r", width=10, pointsize=10)
-    ggplot(scores, aes(x=PC1, y=PC2))+
+
+
+    PCA.plot<-ggplot(scores, aes(x=PC1, y=PC2))+
       theme(legend.text = element_text(size = 30, face = "bold"))+
       geom_point(aes(colour=data, size=data, shape=data))+
       scale_size_manual(values=c(3,3,3,10))+
       scale_colour_brewer(palette="Spectral")
-    dev.copy(pdf,paste("PCA12",rownames(observed)[i],".pdf",sep=""))
+    pdf(paste("PCA12",rownames(observed)[i],".pdf",sep=""), paper="a4r", width=10, pointsize=10)
+    plot(PCA.plot)
     dev.off()
 
 
