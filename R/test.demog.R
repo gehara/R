@@ -7,6 +7,7 @@ test.demog<-function(nsims,
                      tol=0.01,
                      path=path){
   tabela<-NULL
+  theme_set(theme_grey(base_size = 30))
 
   for(i in 1:nrow(Ne.prior)){
 
@@ -28,9 +29,26 @@ test.demog<-function(nsims,
     prob<-postpr(observed[i,],index,models[,5:8],method="rejection", tol=tol)
     prob<-summary(prob)
 
+
+    data<-c(index,"observed")
+    x<-rbind(models[,5:8],observed[i,])
+    PCA<-prcomp(x, center = T, scale. = T, retx=T)
+    scores <- data.frame(PCA$x[,1:2])
+
+    #pdf(paste("PCA12",rownames(observed)[i],".pdf",sep=""), paper="a4r", width=10, pointsize=10)
+    ggplot(scores, aes(x=PC1, y=PC2))+
+      theme(legend.text = element_text(size = 30, face = "bold"))+
+      geom_point(aes(colour=data, size=data, shape=data))+
+      scale_size_manual(values=c(3,3,3,10))+
+      scale_colour_brewer(palette="Spectral")
+    dev.copy(pdf,paste("PCA12",rownames(observed)[i],".pdf",sep=""))
+    dev.off()
+
+
     tabela<-rbind(tabela,prob$Prob)
   }
-  rownames(tabela)<-Ne.prior[,1]
+  rownames(tabela)<-rownames(observed)
+
   return(tabela)
 }
 
