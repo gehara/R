@@ -1,8 +1,8 @@
 observed.demog.sumstat<-function(path.to.fasta,fasta.files){
 
   setwd(path.to.fasta)
-  #fasta.files<-list.files()
-  #fasta.files<-fasta.files[grep(".fas",fasta.files)]
+  fasta.files<-list.files()
+  fasta.files<-fasta.files[grep(".fas",fasta.files)]
 
   ms.output<-fasta2ms(path.to.fasta,fasta.files,write.file=F)
   bp.length<-list()
@@ -24,6 +24,7 @@ observed.demog.sumstat<-function(path.to.fasta,fasta.files){
     SS<-c(pi[[1]],ss[[j]],H,TD[1])
     sum.stat<-rbind(sum.stat,SS)
     }
-
+rownames(sum.stat)<-fasta.files
+colnames(sum.stat)<-c("pi","ss","H","TD")
 return(sum.stat)
 }
