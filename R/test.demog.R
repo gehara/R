@@ -22,8 +22,8 @@ test.demog<-function(nsims,
     for(j in 1:nrow(mod)){
       sim.demog(nsims=nsims,coexp.prior=coexp.prior,Ne.prior=Ne.prior[i,], alpha=alpha,
                 NeA.prior=mod[j,],time.prior=time.prior[i,],gene.prior=gene.prior[i,],append.sims = F, path=path)
-      result<-read.table(file=paste(Ne.prior[,1],"demog_sim.txt",sep=""), header=T)
-      pars<-read.table(file=paste(Ne.prior[,1],"pop_parameters.txt",sep=""), header=T)
+      result<-read.table(file=paste(Ne.prior[i,1],"demog_sim.txt",sep=""), header=T)
+      pars<-read.table(file=paste(Ne.prior[i,1],"pop_parameters.txt",sep=""), header=T)
       models<-rbind(models,result)
       parameters<-rbind(parameters,pars)
       index<-c(index,rep(rownames(mod)[j],nrow(result)))
@@ -59,8 +59,8 @@ test.demog<-function(nsims,
     plot(PCA.plot)
     graphics.off()
 
-    write.table(cbind(index,models),file=paste(Ne.prior[,1],"demog_sim.txt",sep=""), quote=F,row.names=F, col.names=T, append=F, sep="\t")
-    write.table(parameters,file=paste(Ne.prior[,1],"pop_parameters.txt",sep=""), quote=F,row.names=F, col.names=T, append=F,sep="\t")
+    write.table(cbind(index,models),file=paste(Ne.prior[i,1],"demog_sim.txt",sep=""), quote=F,row.names=F, col.names=T, append=F, sep="\t")
+    write.table(parameters,file=paste(Ne.prior[i,1],"pop_parameters.txt",sep=""), quote=F,row.names=F, col.names=T, append=F,sep="\t")
 
   }
   rownames(tabela)<-rownames(observed)
