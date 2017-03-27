@@ -29,17 +29,18 @@ test.demog<-function(nsims,
       parameters<-rbind(parameters,pars)
       index<-c(index,rep(rownames(mod)[j],nrow(result)))
     }
+
+    if(method=="rejection"){
     prob<-postpr(observed[i,],index,models,method=method, tol=tol)
     prob<-summary(prob)
     tabela<-rbind(tabela,prob$Prob)
-    #if(sort(prob$Prob)[1]==0){
-    #  tabela<-rbind(tabela,prob$Prob)
-    #} else {
-    #  prob<-postpr(observed[i,],index,models[,5:8],method="neuralnet", tol=tol)
-    #  prob<-summary(prob)
-    #  tabela<-rbind(tabela,prob$neuralnet$Prob)
-    #
-    #}
+    }
+
+    if(method=="neuralnet"){
+    prob<-postpr(observed[i,],index,models,method=method, tol=tol)
+    prob<-summary(prob)
+    tabela<-rbind(tabela,prob$neuralnet$Prob)
+    }
 
     if(CV==T){
       cv<-cv4postpr(index,models,nval=nval,tols=tol,method=method)
