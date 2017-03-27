@@ -28,7 +28,7 @@ test.demog<-function(nsims,
       parameters<-rbind(parameters,pars)
       index<-c(index,rep(rownames(mod)[j],nrow(result)))
     }
-    prob<-postpr(observed[i,],index,models[,5:8],method=method, tol=tol)
+    prob<-postpr(observed[i,],index,models,method=method, tol=tol)
     prob<-summary(prob)
     tabela<-rbind(tabela,prob$Prob)
     #if(sort(prob$Prob)[1]==0){
@@ -40,7 +40,7 @@ test.demog<-function(nsims,
     #
     #}
 
-    cv<-cv4postpr(index,models[,5:8],nval=nval,tols=tol,method=method)
+    cv<-cv4postpr(index,models,nval=nval,tols=tol,method=method)
     pdf(paste("CV_",rownames(observed)[i],".pdf",sep=""), paper="a4r", width=10, pointsize=10)
     plot(cv)
     graphics.off()

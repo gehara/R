@@ -30,11 +30,9 @@ sim.demog<-function(nsims,
 
     z<-sumstat(ms.output=y,gene.prior=gene.prior)
 
-    simulations<-z
-
     populations.par<-unlist(x$pop.par)
 
-    write.table(t(simulations),file="demog_sim.txt", quote=F,row.names=F, col.names=F, append=T, sep="\t")
+    write.table(z,file="demog_sim.txt", quote=F,row.names=F, col.names=F, append=T, sep="\t")
     write.table(t(populations.par),file="pop_parameters.txt", quote=F,row.names=F, col.names=F, append=T,sep="\t")
     print(paste(i,"sims of",nsims,"| zeta = ",x$coexp.par[,1]))
    })
