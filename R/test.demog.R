@@ -5,6 +5,7 @@ test.demog<-function(nsims,
                      observed,
                      alpha=F,
                      tol=0.01,
+                     nval=100,
                      method="rejection",
                      path=path){
   tabela<-NULL
@@ -27,7 +28,7 @@ test.demog<-function(nsims,
       parameters<-rbind(parameters,pars)
       index<-c(index,rep(rownames(mod)[j],nrow(result)))
     }
-    prob<-postpr(observed[i,],index,models[,5:8],method="rejection", tol=tol)
+    prob<-postpr(observed[i,],index,models[,5:8],method=method, tol=tol)
     prob<-summary(prob)
     tabela<-rbind(tabela,prob$Prob)
     #if(sort(prob$Prob)[1]==0){
@@ -36,10 +37,10 @@ test.demog<-function(nsims,
     #  prob<-postpr(observed[i,],index,models[,5:8],method="neuralnet", tol=tol)
     #  prob<-summary(prob)
     #  tabela<-rbind(tabela,prob$neuralnet$Prob)
-    #  print("RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRROLOU!!!!!")
+    #
     #}
 
-    cv<-cv4postpr(index,models[,5:8],nval=100,tols=tol,method="rejection")
+    cv<-cv4postpr(index,models[,5:8],nval=nval,tols=tol,method=method)
     pdf(paste("CV_",rownames(observed)[i],".pdf",sep=""), paper="a4r", width=10, pointsize=10)
     plot(cv)
     graphics.off()

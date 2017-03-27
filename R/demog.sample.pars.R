@@ -40,8 +40,7 @@ demog.sample.pars<-function(nruns,
       pop.par[[1]][1,]<-po.par
 
     pars<-list(NULL,NULL,NULL)
-  names(pars)<-c("coexp.par","MS.par","pop.par")
-  pars$coexp.par<-cbind(0,0,0,0)
+  names(pars)<-c("MS.par","pop.par")
   pars$MS.par<-MS.par
   pars$pop.par<-po.par
   return(pars)
