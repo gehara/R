@@ -15,9 +15,9 @@ sim.demog<-function(nsims,
   if(append.sims==F){
     simulations<-matrix(nrow=1,ncol=4)
     simulations[1,]<-c("pi","ss","H","TD")
-    write.table(simulations,file=paste(Ne.prior[i,],"demog_sim.txt",sep=""), quote=F,row.names=F, col.names=F, sep="\t")
+    write.table(simulations,file=paste(Ne.prior[1,],"demog_sim.txt",sep=""), quote=F,row.names=F, col.names=F, sep="\t")
     populations.par<-matrix(c("Ne","Exp.time","NeA","mi"),nrow=1,ncol=4)
-    write.table(populations.par,file=paste(Ne.prior[i,],"pop_parameters.txt",sep=""), quote=F,row.names=F, col.names=F, sep="\t")
+    write.table(populations.par,file=paste(Ne.prior[1,],"pop_parameters.txt",sep=""), quote=F,row.names=F, col.names=F, sep="\t")
   }
 
 
@@ -32,8 +32,8 @@ sim.demog<-function(nsims,
 
     populations.par<-unlist(x$pop.par)
 
-    write.table(z,file=paste(Ne.prior[i,],"demog_sim.txt",sep=""), quote=F,row.names=F, col.names=F, append=T, sep="\t")
-    write.table(t(populations.par),file=paste(Ne.prior[i,],"pop_parameters.txt",sep=""), quote=F,row.names=F, col.names=F, append=T,sep="\t")
+    write.table(z,file=paste(Ne.prior[1,],"demog_sim.txt",sep=""), quote=F,row.names=F, col.names=F, append=T, sep="\t")
+    write.table(t(populations.par),file=paste(Ne.prior[1,],"pop_parameters.txt",sep=""), quote=F,row.names=F, col.names=F, append=T,sep="\t")
     print(paste(i,"sims of",nsims,"| single pop demogragphic test"))
    })
   print(TIME)
