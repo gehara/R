@@ -59,6 +59,9 @@ test.demog<-function(nsims,
     plot(PCA.plot)
     graphics.off()
 
+    write.table(cbind(index,models),file=paste(Ne.prior[i,],"demog_sim.txt",sep=""), quote=F,row.names=F, col.names=T, append=F, sep="\t")
+    write.table(parameters,file=paste(Ne.prior[i,],"pop_parameters.txt",sep=""), quote=F,row.names=F, col.names=T, append=F,sep="\t")
+
   }
   rownames(tabela)<-rownames(observed)
 
