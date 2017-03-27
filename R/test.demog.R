@@ -46,7 +46,7 @@ test.demog<-function(nsims,
     graphics.off()
 
     data<-c(index,"observed")
-    x<-rbind(models[,5:8],observed[i,])
+    x<-rbind(models,observed[i,])
     PCA<-prcomp(x, center = T, scale. = T, retx=T)
     scores <- data.frame(PCA$x[,1:2])
 
