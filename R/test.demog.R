@@ -7,6 +7,7 @@ test.demog<-function(nsims,
                      tol=0.01,
                      nval=100,
                      method="rejection",
+                     CV=F,
                      path=path){
   tabela<-NULL
   theme_set(theme_grey(base_size = 30))
@@ -40,10 +41,12 @@ test.demog<-function(nsims,
     #
     #}
 
-    cv<-cv4postpr(index,models,nval=nval,tols=tol,method=method)
-    pdf(paste("CV_",rownames(observed)[i],".pdf",sep=""), paper="a4r", width=10, pointsize=10)
-    plot(cv)
-    graphics.off()
+    if(CV==T){
+      cv<-cv4postpr(index,models,nval=nval,tols=tol,method=method)
+      pdf(paste("CV_",rownames(observed)[i],".pdf",sep=""), paper="a4r", width=10, pointsize=10)
+      plot(cv)
+      graphics.off()
+    }
 
     data<-c(index,"observed")
     x<-rbind(models,observed[i,])
