@@ -7,6 +7,8 @@ test.demog<-function(nsims,
                      tol=0.01,
                      nval=100,
                      method="rejection",
+                     do.ABC=F,
+                     do.PCA=F,
                      CV=F,
                      path=path){
   tabela<-NULL
@@ -30,16 +32,18 @@ test.demog<-function(nsims,
       index<-c(index,rep(rownames(mod)[j],nrow(result)))
     }
 
-    if(method=="rejection"){
-    prob<-postpr(observed[i,],index,models,method=method, tol=tol)
-    prob<-summary(prob)
-    tabela<-rbind(tabela,prob$Prob)
-    }
+    if(do.ABC==T){
+      if(method=="rejection"){
+      prob<-postpr(observed[i,],index,models,method=method, tol=tol)
+      prob<-summary(prob)
+      tabela<-rbind(tabela,prob$Prob)
+      }
 
-    if(method=="neuralnet"){
-    prob<-postpr(observed[i,],index,models,method=method, tol=tol)
-    prob<-summary(prob)
-    tabela<-rbind(tabela,prob$neuralnet$Prob)
+      if(method=="neuralnet"){
+      prob<-postpr(observed[i,],index,models,method=method, tol=tol)
+      prob<-summary(prob)
+      tabela<-rbind(tabela,prob$neuralnet$Prob)
+      }
     }
 
     if(CV==T){
@@ -48,7 +52,7 @@ test.demog<-function(nsims,
       plot(cv)
       graphics.off()
     }
-
+if(do.PCA==T){
     data<-c(index,"observed")
     x<-rbind(models,observed[i,])
     PCA<-prcomp(x, center = T, scale. = T, retx=T)
@@ -62,14 +66,17 @@ test.demog<-function(nsims,
     pdf(paste("PCA12",rownames(observed)[i],".pdf",sep=""), paper="a4r", width=10, pointsize=10)
     plot(PCA.plot)
     graphics.off()
-
+}
     write.table(cbind(index,models),file=paste(Ne.prior[i,1],"demog_sim.txt",sep=""), quote=F,row.names=F, col.names=T, append=F, sep="\t")
     write.table(parameters,file=paste(Ne.prior[i,1],"pop_parameters.txt",sep=""), quote=F,row.names=F, col.names=T, append=F,sep="\t")
 
   }
-  rownames(tabela)<-rownames(observed)
 
-  return(tabela)
+  if(do.ABC==T){
+    rownames(tabela)<-rownames(observed)
+    return(tabela)
+  }
+
 }
 
 
