@@ -22,7 +22,7 @@ observed.demog.sumstat<-function(path.to.fasta,fasta.files){
     TD<-tajima.test(x)$D
     #R2<-R2.test(x,B=0,plot = F,quiet = T)
     spec<-site.spectrum(x)[1:3]
-    SS<-c(pi[[1]],ss[[j]],H,TD[1],R2,spec)
+    SS<-c(pi[[1]],ss[[j]],H,TD[1],spec)
 
     sum.stat<-rbind(sum.stat,SS)
     }
