@@ -20,11 +20,13 @@ observed.demog.sumstat<-function(path.to.fasta,fasta.files){
     pi<-nuc.div(x)
     H<-H.div(x)[2]
     TD<-tajima.test(x)$D
+    #R2<-R2.test(x,B=0,plot = F,quiet = T)
+    spec<-site.spectrum(x)[1:3]
+    SS<-c(pi[[1]],ss[[j]],H,TD[1],R2,spec)
 
-    SS<-c(pi[[1]],ss[[j]],H,TD[1])
     sum.stat<-rbind(sum.stat,SS)
     }
 rownames(sum.stat)<-fasta.files
-colnames(sum.stat)<-c("pi","ss","H","TD")
+colnames(sum.stat)<-c("pi","ss","H","TD","ss1","ss2","ss3")
 return(sum.stat)
 }
