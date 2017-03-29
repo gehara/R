@@ -13,8 +13,8 @@ sim.demog<-function(nsims,
 
 
   if(append.sims==F){
-    simulations<-matrix(nrow=1,ncol=4)
-    simulations[1,]<-c("pi","ss","H","TD")
+    simulations<-matrix(nrow=1,ncol=8)
+    simulations[1,]<-c("pi","ss","H","TD","R2","ss1","ss2","ss3")
     write.table(simulations,file=paste(Ne.prior[,1],"demog_sim.txt",sep=""), quote=F,row.names=F, col.names=F, sep="\t")
     populations.par<-matrix(c("Ne","Exp.time","NeA","mi"),nrow=1,ncol=4)
     write.table(populations.par,file=paste(Ne.prior[,1],"pop_parameters.txt",sep=""), quote=F,row.names=F, col.names=F, sep="\t")
