@@ -12,14 +12,14 @@ test.demog<-function(nsims,
                      CV=F,
                      path=path){
   tabela<-NULL
-  theme_set(theme_grey(base_size = 30))
+
 
   for(i in 1:nrow(Ne.prior)){
 
     parameters<-NULL
     models<-NULL
     index<-NULL
-    mod<-cbind(c(1,0.001,2),c(1,0.1,10))
+    mod<-cbind(c(1,0.001,2),c(1,0.1,20))
     rownames(mod)<-c("CS","Exp","BOTT")
 
     for(j in 1:nrow(mod)){
@@ -52,11 +52,12 @@ test.demog<-function(nsims,
       plot(cv)
       graphics.off()
     }
-if(do.PCA==T){
-    data<-c(index,"observed")
-    x<-rbind(models,observed[i,])
-    PCA<-prcomp(x, center = T, scale. = T, retx=T)
-    scores <- data.frame(PCA$x[,1:2])
+    if(do.PCA==T){
+      theme_set(theme_grey(base_size = 30))
+      data<-c(index,"observed")
+      x<-rbind(models,observed[i,])
+      PCA<-prcomp(x, center = T, scale. = T, retx=T)
+      scores <- data.frame(PCA$x[,1:2])
 
     PCA.plot<-ggplot(scores, aes(x=PC1, y=PC2))+
       theme(legend.text = element_text(size = 30, face = "bold"))+
