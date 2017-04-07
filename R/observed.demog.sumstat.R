@@ -11,6 +11,10 @@ observed.demog.sumstat<-function(path.to.fasta,fasta.files){
     fas<-read.dna(file=fasta.files[i], format="fasta")
     bp.length[[i]]<-ncol(fas)
     ss[[i]]<-as.numeric(strsplit(ms.output[[i]][3]," ")[[1]][2])
+    if(is.null(ss[[i]])){
+      stop(paste("sequence",fasta.files[i],"has zero variation"))
+    }
+
   }
 
   sum.stat<-NULL
