@@ -20,10 +20,7 @@ sim.coexp2<-function(nsims,
                "var.pi","mean.pi","skew.pi","kur.pi",
                "var.ss","mean.ss","skew.ss","kur.ss",
                "var.H","mean.H","skew.H","kur.H",
-               "var.TD","mean.TD","skew.TD","kur.TD",
-               "var.sfs1","mean.sfs1","skew.sfs1","kur.sfs1",
-               "var.sfs2","mean.sfs2","skew.sfs2","kur.sfs2",
-               "var.sfs3","mean.sfs3","skew.sfs3","kur.sfs3")
+               "var.TD","mean.TD","skew.TD","kur.TD")
     
     write.table(simulations,file="simulations.txt", quote=F,row.names=F, col.names=F, sep="\t")
     

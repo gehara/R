@@ -17,10 +17,10 @@ sim.coexp<-function(nsims,
   if(append.sims==F){
     simulations<-matrix(nrow=1,ncol=32)
     simulations[1,]<-c("zeta","ts","E(t)","DI",
-                       "mean.pi","mean.ss","mean.Num.h","mean.H","mean.TD","mean.TD.p","mean.R2",
-                       "var.pi","var.ss","var.Num.h","var.H","var.TD","var.TD.p","var.R2",
-                       "skew.pi","skew.ss","skew.Num.h","skew.H","skew.TD","skew.TD.p","skew.R2",
-                       "kur.pi","kur.ss","kur.Num.h","kur.H","kur.TD","kur.TD.p","kur.R2")
+                       "var.pi","mean.pi","skew.pi","kur.pi",
+                       "var.ss","mean.ss","skew.ss","kur.ss",
+                       "var.H","mean.H","skew.H","kur.H",
+                       "var.TD","mean.TD","skew.TD","kur.TD")
 
     write.table(simulations,file="simulations.txt", quote=F,row.names=F, col.names=F, sep="\t")
 
