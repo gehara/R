@@ -53,10 +53,22 @@ test.demog<-function(nsims,
       graphics.off()
     }
     if(do.PCA==T){
-      models[is.na(models)] <- 0
+
       theme_set(theme_grey(base_size = 30))
       data<-c(index,"observed")
       x<-rbind(models,observed[i,])
+
+      remove.zero.var<-function(x){
+        tab<-NULL
+        for(u in 1:ncol(x)){
+          if(length(unique(x[,u]))==1){
+          } else {tab<-cbind(tab,x[,u])}
+        }
+        return(tab)
+      }
+
+      x<-remove.zero.var(x)
+
       PCA<-prcomp(x, center = T, scale. = T, retx=T)
       scores <- data.frame(PCA$x[,1:2])
 
