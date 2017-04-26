@@ -31,7 +31,7 @@ test.demog<-function(nsims,
       parameters<-rbind(parameters,pars)
       index<-c(index,rep(rownames(mod)[j],nrow(result)))
     }
-    models[is.na(models)] <- 0
+
     if(do.ABC==T){
       if(method=="rejection"){
       prob<-postpr(observed[i,],index,models,method=method, tol=tol)
@@ -53,6 +53,7 @@ test.demog<-function(nsims,
       graphics.off()
     }
     if(do.PCA==T){
+      models[is.na(models)] <- 0
       theme_set(theme_grey(base_size = 30))
       data<-c(index,"observed")
       x<-rbind(models,observed[i,])
