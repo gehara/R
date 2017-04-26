@@ -12,9 +12,11 @@ fasta2ms<-function(path.to.fasta,fasta.files,write.file=T){
       c<-length(grep("c",fas[,i]))
       g<-length(grep("g",fas[,i]))
       t<-length(grep("t",fas[,i]))
+      n<-length(grep("n",fas[,i]))
       gap<-length(grep("-",fas[,i]))
       if(nrow(fas) %in% c(a,c,g,t)){
       } else if (gap>0){
+        } else if(n>0){
         } else {bin<-cbind(bin,fas[,i])
         pos<-c(pos,i)
         }
