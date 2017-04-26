@@ -61,8 +61,10 @@ test.demog<-function(nsims,
       remove.zero.var<-function(x){
         tab<-NULL
         for(u in 1:ncol(x)){
-          if(length(unique(x[,u]))==1){
-          } else {tab<-cbind(tab,x[,u])}
+          if(length(unique(x[,u]))>1)
+            {
+            tab<-cbind(tab,x[,u])
+            }
         }
         return(tab)
       }
