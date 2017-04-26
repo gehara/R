@@ -31,7 +31,7 @@ test.demog<-function(nsims,
       parameters<-rbind(parameters,pars)
       index<-c(index,rep(rownames(mod)[j],nrow(result)))
     }
-
+    models[is.na(models)] <- 0
     if(do.ABC==T){
       if(method=="rejection"){
       prob<-postpr(observed[i,],index,models,method=method, tol=tol)
